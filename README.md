@@ -1,2 +1,5 @@
-# projeto-nba
-Projeto individual criado para a apresentação durante a SPRINT 3 do primeiro semestre do curso de Análise e Desenvolvimento de Sistemas na SPTech.
+# Calculadora de íncide PIE
+
+Este projeto foi desenvolvido como o projeto individual requisitado durante o primeiro semestre de ADS na SPTech. O projeto tem como tema a NBA e consiste em uma calculadora de índice PIE (Player Impact Estimate), o PIE é utilizado para medir o impacto de um jogador dentro das quadras, nesse projeto é possível checar os maiores índices da NBA, além de poder criar o seu próprio, se comparando as principais estrelas da maior liga de basquete de mundo.
+
+IMPORTANTE: Para o funcionamento total do projeto, não esqueça de criar o banco de dados (MySQL Workbench) e instalar as dependências a partir do comando "npm i" ou "npm install", para iniciar o projeto, utilize "npm start".
