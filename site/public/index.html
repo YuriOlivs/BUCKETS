@@ -10,22 +10,23 @@
 
     <link rel="icon" href="./assets/icon/favicon2.ico">
     <link rel="stylesheet" href="./css/style.css">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <script src="js/script.js"></script>
 </head>
 
 <body>
-  <header>
-    <nav>
-      <div class="logo">Logo</div>
+  <div class="splash-screen"></div>
+  <header id="header">
+    <nav id="navbar">
+      <a href="#header"><img src="assets/icons/nba-logo.svg" alt="" class="logo"></a>
       <ul class="nav-list">
-        <li class="nav-item"><a href="">O que é PIE</a></li>
-        <li class="nav-item"><a href="">Times</a></li>
-        <li class="nav-item"><a href="">Jogadores</a></li>
-        <li class="nav-item"><a href="">Cálculo de PIE</a></li>
-        <li class="nav-item"><a href="">Sobre</a></li>
+        <li class="nav-item"><a href="#oqe">O que é PIE</a></li>
+        <li class="nav-item"><a href="#times">Times</a></li>
+        <li class="nav-item"><a href="#jogadores">Jogadores</a></li>
+        <li class="nav-item"><a href="#calculo">Cálculo de PIE</a></li>
+        <li class="nav-item"><a href="#sobre">Sobre</a></li>
       </ul>
 
-      <div class="menu">
+      <div id="menu" onclick="closeNav()">
         <div id="line1"></div>
         <div id="line2"></div>
         <div id="line3"></div>
@@ -40,15 +41,15 @@
 
     <div class="header-content">
       <div class="header-texts">
-        <span>
+        <span class="">
           Explore a NBA com uma visão mais profunda e precisa do desempenho dos jogadores
         </span>
-        <span>
+        <span class="">
           Descubra como você se compara aos jogadores da NBA com seu próprio índice PIE personalizado
         </span>
       </div>
       <div class="titulo1">Além dos números</div>
-      <img src="assets/lebron-james.png" alt="">
+      <img src="assets/players/lebron-james.png" alt="" class="">
       <div class="titulo2">Além dos números</div>
     </div>
 
@@ -64,5 +65,48 @@
       </span>
     </div>
   </header>
+  
+  <main>
+    <section id="oqe">
+      <div class="oqe-content">
+        <div class="oqe-texts">
+          <div class="oqe-titles">
+            <h2 class="title">O QUE É O ÍNDICE PIE</h2>
+            <h2 class="title">O QUE É O ÍNDICE PIE</h2>
+          </div>
+          <div class="oqe-desc">
+            <p>
+              PIE, ou Player Impact Estimate, é uma métrica estatística utilizada para avaliar a contribuição de um jogador na quadra durante um jogo. O PIE é uma medida da eficiência de um jogador em relação ao sucesso do time, levando em consideração estatísticas individuais e estatísticas de equipe.
+            </p>
+            <p>
+              Uma das vantagens do PIE é que ele leva em consideração não apenas as estatísticas individuais do jogador, mas também a eficiência do time como um todo, ou seja, um jogador com estatísticas impressionantes, mas que não ajuda a equipe a obter resultados positivos, pode ter um PIE baixo. Por outro lado, um jogador com estatísticas modestas, mas que esteja contribuindo para o sucesso da equipe, pode ter um PIE alto.
+            </p>
+          </div>
+        </div>
+        <div class="image-right">
+          <div class="pts">
+            <span>56 pts</span>
+            <span>56 pts</span>
+          </div>
+          <div class="ast">
+            <span>12 ast</span>
+            <span>12 ast</span>
+          </div>
+          <span class="reb">9 reb</span>
+          <span class="blk">5 blk</span>
+          <div class="min">
+            <span>41 min</span>
+            <span>41 min</span>
+          </div>
+          <img src="assets/players/jimmy-butler.png" alt="">
+        </div>
+      </div>
+
+      <div class="oqe-background">
+        <img src="assets/noise.png" alt="" class="noise">
+        <img src="assets/oqe-background.svg" alt="" class="background">
+      </div>
+    </section>
+  </main>
 </body>
 </html>

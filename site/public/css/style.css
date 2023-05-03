@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,900;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;900;1,500;1,700&display=swap');
 
 :root {
   --main-padding: 100px;
@@ -7,9 +7,15 @@
   --b-radius-2: 16px;
   --text-font: 'Nunito', sans-serif;
   --title-font: 'Raleway', sans-serif;
+  --title-size: 3.5em;
   
   /* cores */
   --gray-500: #616161;
+  --gray-800: #212121;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -18,6 +24,12 @@ body {
   background-color: #000;
   font-family: var(--text-font);
   overflow-x: hidden;
+  height: 300vh;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+  padding: 0;
 }
 
 header {
@@ -41,6 +53,40 @@ nav {
   padding: 2% var(--main-padding);
   color: var(--gray-500);
   z-index: 3;
+  transition: .7s all ease-out;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100px;
+  border-radius: 8px;
+  padding: 8px 12px;
+  color: var(--gray-500);
+  background-color: #212121;
+}
+
+input {
+  background-color: #212121;
+  border: none;
+  outline: none;
+  color: white;
+}
+
+.title {
+  font-family: var(--title-font);
+  font-size: var(--title-size);
+  color: white;
+  -webkit-text-stroke: 1px white;
+  font-weight: 900;
+}
+
+.navbar-ativo {
+  background: rgba( 0, 0, 0, 0.85 );
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  backdrop-filter: blur(12px);
+  height: 5vh;
 }
 
 .nav-list {
@@ -53,16 +99,67 @@ nav {
   color: var(--gray-500);
   text-decoration: none;
   font-weight: 600;
+  cursor: pointer !important;
 }
 
-.menu {
+.nav-item {
+  transition: .4s all ease-out;
+}
+
+.nav-item-ativo {
+  opacity: 0;
+  /* transform: translateY(-100px); */
+  user-select: none;
+  pointer-events: none;
+
+}
+
+.logo {
+  height: 35px;
+}
+
+#menu {
+  position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: flex-end;
-  width: 40px;
+  width: 30px;
   height: 20px;
   cursor: pointer;
+  user-select: none;
+}
+
+#line1, #line2, #line3 {
+  width: 100%;
+  height: 2px;
+  border-radius: var(--b-radius-1);
+  background-color: var(--gray-500);
+  transition: .4s all ease-out;
+}
+
+#line1 {
+  width: 60%;
+}
+
+#line2 {
+  width: 100%;
+}
+
+#line3 {
+  width: 70%;
+}
+
+.line1-ativo {
+  width: 30% !important;
+}
+
+.line2-ativo {
+  width: 30% !important;
+}
+
+.line3-ativo {
+  width: 30% !important;
 }
 
 .social-media {
@@ -80,8 +177,8 @@ nav {
 }
 
 .header-content {
-  position: relative;
   display: flex;
+  position: relative;
   justify-content: center;
   width: 100%;
   height: 100%;
@@ -129,13 +226,16 @@ nav {
   width: 100vw;
   height: 100vh;
   mix-blend-mode: overlay;
+  user-select: none;
+  pointer-events: none;
 }
 
 .background {
   position: absolute;
   width: 100vw;
-  z-index: -1;
+  z-index: -5;
   user-select: none;
+  pointer-events: none;
 }
 
 .titulo1, .titulo2 {
@@ -175,45 +275,175 @@ nav {
 .scroll-down img {
   width: 14px;
   rotate: 90deg;
-  animation: scroll 2s linear 2s infinite;
 }
 
-@keyframes scroll {
-  0% {
-    transform: translateY(15px);
-  }
-  20% {
-    transform: translateY(0px);
-  }
-  40% {
-    transform: translateY(10px);
-  }
-  60% {
-    transform: translateY(0px);
-  }
-  80% {
-    transform: translateY(5px);
-  }
-  100% {
-    transform: translateY(0px);
-  }
-}
 
-#line1, #line2, #line3 {
+#oqe {
+  position: relative;
+  display: flex;
   width: 100%;
-  height: 2px;
-  border-radius: var(--b-radius-1);
-  background-color: var(--gray-500);
 }
 
-#line1 {
-  width: 50%;
+.oqe-background {
+  position: absolute;
 }
 
-#line2 {
-  width: 70%;
+.oqe-content {
+  display: flex;
+  position: relative;
+  padding: calc(var(--main-padding) * 1.8) var(--main-padding);
+  z-index: 1;
 }
 
-#line3 {
-  width: 40%;
+.oqe-titles {
+  display: flex;
+  flex-direction: column;
 }
+
+.oqe-titles h2:last-child {
+  color: transparent;
+  -webkit-text-stroke: 1px #BF201C;
+}
+
+.oqe-desc {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  width: 30%;
+  color: white;
+  font-size: 1.3em;
+  margin-top: 80px;
+}
+
+.image-right  {
+  position: absolute;
+  right: var(--main-padding);
+  width: 45%;
+  bottom: 10%;
+}
+
+.image-right img {
+  width: 100%;
+  transform: scaleX(-1);
+}
+
+.image-right span{
+  position: absolute;
+  font-weight: 900;
+  color: white;
+  font-family: var(--title-font);
+  font-size: var(--title-size);
+  -webkit-text-stroke: 1px white;
+} 
+
+.pts span:nth-child(1){
+  top: 25%;
+  left: 16%;
+  z-index: -1;
+}
+
+.pts span:nth-child(2){
+  top: 25%;
+  left: 16%;
+  z-index: -1;
+  color: transparent;
+  z-index: 1;
+}
+
+.ast span:nth-child(1)  {
+  top: 0%;
+  left: 55%;
+  z-index: -1;
+}
+
+.ast span:nth-child(2) {
+  top: 0%;
+  left: 55%;
+  color: transparent;
+  z-index: 1;
+}
+
+.reb {
+  top: 55%;
+  left: 4%;
+  z-index: -1;
+}
+
+.blk {
+  top: 40%;
+  left: 73.5%;
+  z-index: -1;
+}
+
+.min span:nth-child(1){
+  top: 70%;
+  left: 66%;
+  z-index: -1;
+}
+
+.min span:nth-child(2){
+  top: 70%;
+  left: 66%;
+  z-index: 1;
+  color: transparent;
+}
+/* animações */
+/* .slideInDown {
+  animation: slideInDown .5s ease-out;
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -200%, 0)
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0)
+  }
+}
+
+.slideInRight {
+  animation: slideInRight .5s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translate3d(-200%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInLeft {
+  animation: slideInLeft .5s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translate3d(200%, 0, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.slideInUp {
+  animation: slideInUp .5s ease;
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 200%, 0);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+} */
