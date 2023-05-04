@@ -24,7 +24,6 @@ body {
   background-color: #000;
   font-family: var(--text-font);
   overflow-x: hidden;
-  height: 300vh;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -265,6 +264,19 @@ input {
   color: var(--gray-500);
   transform: rotate(-90deg);
   z-index: 1;
+  animation: floating 2s infinite ease-in-out;
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(-20px) rotate(-90deg);
+  }
+  50% {
+    transform: translateY(0px) rotate(-90deg);
+  }
+  100% {
+    transform: translateY(-20px) rotate(-90deg);
+  }
 }
 
 .scroll-down span {
@@ -386,6 +398,28 @@ input {
   left: 66%;
   z-index: 1;
   color: transparent;
+}
+
+#jogadores {
+  padding: 0 var(--main-padding);
+}
+
+#jogadores .title {
+  text-transform: uppercase;
+  font-size: 3rem;
+}
+
+.header-jogadores {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  color: white;
+}
+
+.header-jogadores p {
+  font-size: 24px;
+  width: 38%;
+  text-align: right;
 }
 /* animações */
 /* .slideInDown {
