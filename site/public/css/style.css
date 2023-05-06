@@ -438,6 +438,12 @@ input {
   font-weight: 700;
 }
 
+#calc {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+}
+
 .calc-content {
   padding: var(--main-padding);
 }
@@ -466,6 +472,12 @@ input {
 .calc-form .flex-row {
   justify-content: space-between;
   gap: 12px;
+}
+
+#calc .site-background {
+  border: 1px solid white;
+  position: absolute !important;
+  top: 0;
 }
 
 /* animações
