@@ -4,6 +4,7 @@
 :root {
   --main-padding: 100px;
   --b-radius-1: 8px;
+
   --b-radius-2: 16px;
   --text-font: 'Nunito', sans-serif;
   --title-font: 'Raleway', sans-serif;
@@ -12,6 +13,7 @@
   /* cores */
   --gray-500: #616161;
   --gray-800: #212121;
+  --blue: #4D89FF;
 }
 
 html {
@@ -59,7 +61,6 @@ label {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  width: 100px;
   border-radius: 8px;
   padding: 8px 12px;
   color: var(--gray-500);
@@ -73,12 +74,17 @@ input {
   color: white;
 }
 
+.flex-row {
+  display: flex;
+}
+
 .title {
   font-family: var(--title-font);
   font-size: var(--title-size);
   color: white;
   -webkit-text-stroke: 1px white;
   font-weight: 900;
+  text-transform: uppercase;
 }
 
 .navbar-ativo {
@@ -216,7 +222,9 @@ input {
   user-select: none;
 }
 
-.header-background {
+/* BACKGROUND DA HEADER */
+
+.site-background {
   position: absolute;
 }
 
@@ -294,22 +302,24 @@ input {
   position: relative;
   display: flex;
   width: 100%;
-}
-
-.oqe-background {
-  position: absolute;
+  margin-top: 100px;
 }
 
 .oqe-content {
   display: flex;
   position: relative;
   padding: calc(var(--main-padding) * 1.8) var(--main-padding);
+  padding-bottom: 0;
   z-index: 1;
 }
 
 .oqe-titles {
   display: flex;
   flex-direction: column;
+}
+
+.oqe-titles .titles {
+  font-size: 3em !important;
 }
 
 .oqe-titles h2:last-child {
@@ -320,18 +330,19 @@ input {
 .oqe-desc {
   display: flex;
   flex-direction: column;
-  gap: 50px;
-  width: 30%;
+  gap: 30px;
+  width: 35%;
   color: white;
-  font-size: 1.3em;
-  margin-top: 80px;
+  font-size: 1rem;
+  font-weight: 700;
 }
 
 .image-right  {
   position: absolute;
   right: var(--main-padding);
   width: 45%;
-  bottom: 10%;
+  bottom: 0%;
+  user-select: none;
 }
 
 .image-right img {
@@ -401,7 +412,7 @@ input {
 }
 
 #jogadores {
-  padding: 0 var(--main-padding);
+  padding: 80px var(--main-padding);
 }
 
 #jogadores .title {
@@ -416,17 +427,53 @@ input {
   color: white;
 }
 
-.header-jogadores p {
-  font-size: 24px;
-  width: 38%;
-  text-align: right;
-}
-/* animações */
-/* .slideInDown {
-  animation: slideInDown .5s ease-out;
+.header-jogadores .title {
+  font-size: 2.5rem !important;
 }
 
-@keyframes slideInDown {
+.header-jogadores p {
+  font-size: 16px;
+  width: 38%;
+  text-align: right;
+  font-weight: 700;
+}
+
+.calc-content {
+  padding: var(--main-padding);
+}
+
+.calc-titles h2:first-child{
+  color: transparent;
+  -webkit-text-stroke: 1px #4D89FF;
+}
+
+.calc-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 32%;
+  box-sizing: border-box;
+}
+
+.calc-form label{
+  width: 180px !important;
+}
+
+.calc-form label:first-child {
+  width: 100%;
+}
+
+.calc-form .flex-row {
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* animações
+.slideInDown {
+  animation: slideInDown .5s ease-out;
+} */
+
+/* @keyframes slideInDown {
   from {
     opacity: 0;
     transform: translate3d(0, -200%, 0)
@@ -479,5 +526,6 @@ input {
   to {
     opacity: 1;
     transform: translate3d(0, 0, 0);
+    transform: ;
   }
-} */
+}  */
