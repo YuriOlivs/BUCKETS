@@ -22,5 +22,5 @@ function cadastrar(nome, pontos, assists, rebotes, tocos, arrmsErrados, arrmsCer
 
 module.exports = {
    listar,
-   cadastrar
+   cadastrar,
 }
