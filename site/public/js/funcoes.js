@@ -8,7 +8,7 @@ function validarSessao() {
         //window.alert(`Seja bem-vindo, ${nome}!`);
         ipt_nome_jogador.value = nome;
 
-        window.localtion = "calculadora.html"
+        window.localtion = "private/calculadora.html"
         // finalizarAguardar();
     } else {
         // window.location = "index.html";

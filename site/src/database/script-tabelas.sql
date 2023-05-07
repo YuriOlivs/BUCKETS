@@ -14,12 +14,14 @@ CREATE TABLE franquia(
 	idFranquia INT PRIMARY KEY AUTO_INCREMENT, 
     cidade VARCHAR(50), 
     nome VARCHAR(50), 
+    sigla CHAR(3),
     conferencia VARCHAR(50) 
 ); 
 
 CREATE TABLE jogador( 
 	idJogador INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(100), 
+    posicao VARCHAR(2),
     fkFranquia INT, 
     FOREIGN KEY (fkFranquia) REFERENCES franquia(idFranquia) 
 ); 
@@ -34,7 +36,7 @@ CREATE TABLE stats(
     arrmsCertos FLOAT, 
     lancesLivresCertos FLOAT, 
     lancesLivresErrados FLOAT, 
-    minutosJogados FLOAT, 
+    minutosJogados TIME, 
     faltasCometidas FLOAT, 
     faltasSofridas FLOAT, 
     roubosBola FLOAT,
@@ -43,7 +45,7 @@ CREATE TABLE stats(
     CONSTRAINT fkJogadorStats FOREIGN KEY (fkJogador) REFERENCES jogador(idJogador),
     PRIMARY KEY (idStats, fkJogador)
 ); 
-
+/*
 INSERT INTO franquia 
 VALUES 
 (null, 'Philadelphia', '76ers', 'Leste'), 
@@ -76,7 +78,7 @@ VALUES
 (null, 'Portland', 'Trail Blazers', 'Oeste'), 
 (null, 'Los Angeles', 'Lakers', 'Oeste'), 
 (null, 'Los Angeles', 'Clippers', 'Oeste'); 
-
+*/
 SELECT * FROM usuario;
 SELECT * FROM jogador;
 SELECT * FROM franquia;

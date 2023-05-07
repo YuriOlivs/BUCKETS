@@ -5,12 +5,12 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <title>BUCKETS | Calculadora de PIE</title>
 
-   <link rel="stylesheet" href="./css/style.css">
+   <link rel="stylesheet" href="../css/style.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
    <link rel="icon" href="assets/icons/basketball.png" type="image/x-icon">
 
-   <script src="./js/funcoes.js"></script>
-   <script src="js/script.js"></script>
+   <script src="../js/funcoes.js"></script>
+   <script src="../js/script.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
@@ -19,11 +19,11 @@
 </head>
 <body>
    <div class="site-background">
-      <img src="assets/noise.png" alt="" class="noise">
-      <img src="assets/calc-background.png" alt="" class="background">
+      <img src="../assets/noise.png" alt="" class="noise">
+      <img src="../assets/calc-background.png" alt="" class="background">
    </div>
    <nav id="navbar">
-      <a href="#header"><img src="assets/icons/nba-logo.svg" alt="" class="logo"></a>
+      <a href="#header"><img src="../assets/icons/nba-logo.svg" alt="" class="logo"></a>
       <ul class="nav-list">
         <li class="nav-item"><a href="#oqe">O que é PIE</a></li>
         <li class="nav-item"><a href="#jogadores">Jogadores</a></li>
@@ -136,26 +136,26 @@
  
    function cadStats() {
  
-     var nomeVar = ipt_nome_jogador.value;
-     var pontosVar = ipt_pontos.value;
-     var assistsVar = ipt_assists.value;
-     var rebotesVar = ipt_rebotes.value;
-     var tocosVar = ipt_tocos.value;
-     var arrmsErradosVar = ipt_arrms_tentados.value - ipt_arrms_certos.value;
-     var arrmsCertosVar = ipt_arrms_certos.value;
-     var llCertosVar = ipt_ll_certos.value;
-     var llErradosVar = ipt_ll_tentados.value - ipt_ll_certos.value
-     var minutosVar = ipt_minutos.value;
-     var foulCometidasVar = ipt_foul_cometidas.value;
-     var foulSofridasVar = ipt_foul_sofridas.value;
-     var roubosBolaVar = ipt_roubos_bola.value;
+      const nomeVar = ipt_nome_jogador.value,
+         pontosVar = ipt_pontos.value,
+         assistsVar = ipt_assists.value,
+         rebotesVar = ipt_rebotes.value,
+         tocosVar = ipt_tocos.value,
+         arrmsErradosVar = ipt_arrms_tentados.value - ipt_arrms_certos.value,
+         arrmsCertosVar = ipt_arrms_certos.value,
+         llCertosVar = ipt_ll_certos.value,
+         llErradosVar = ipt_ll_tentados.value - ipt_ll_certos.value,
+         minutosVar = ipt_minutos.value,
+         foulCometidasVar = ipt_foul_cometidas.value,
+         foulSofridasVar = ipt_foul_sofridas.value,
+         roubosBolaVar = ipt_roubos_bola.value;
 
       if(nomeVar == "" || nomeVar === undefined) {
          nomeVar = sessionStorage.NOME_USUARIO;
       }
 
      // Enviando o valor da nova input
-     fetch("/jogador/cadastrar", {
+     fetch("/stats/cadastrar", {
      method: "POST",
      headers: {
          "Content-Type": "application/json"
