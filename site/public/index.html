@@ -168,14 +168,14 @@
             </div>
 
             <div class="flex-row">
-              <label for="ipt_faul_cometidas">
+              <label for="ipt_foul_cometidas">
                 Faltas cometidas:
-                <input type="text" id="ipt_faul_cometidas" placeholder="3">
+                <input type="text" id="ipt_foul_cometidas" placeholder="3">
               </label>
 
-              <label for="ipt_faul_sofridas">
+              <label for="ipt_foul_sofridas">
                 Faltas sofridas:
-                <input type="text" id="ipt_faul_sofridas" placeholder="5">
+                <input type="text" id="ipt_foul_sofridas" placeholder="5">
               </label>
             </div>
 
@@ -190,13 +190,13 @@
               </label>
             </div>
           </div>
-          <button onclick="cadStatsJog()">Calcular</button>
+          <button onclick="cadStats()">Calcular</button>
         </div>
 
-        <div class="site-background">
+        <!-- <div class="site-background">
           <img src="assets/noise.png" alt="" class="noise">
           <img src="assets/calc-background.png" alt="" class="background">
-        </div>
+        </div> -->
     </section>
 
     <!-- <section id="jogadores">
@@ -218,5 +218,58 @@
 </html>
 
 <script>
+  function cadStats() {
 
+    var nomeVar = ipt_nome.value;
+    var pontosVar = ipt_pontos.value;
+    var assistsVar = ipt_assists.value;
+    var rebotesVar = ipt_rebotes.value;
+    var tocosVar = ipt_tocos.value;
+    var arrmsErradosVar = ipt_arrms_tentados.value - ipt_arrms_certos.value;
+    var arrmsCertosVar = ipt_arrms_certos.value;
+    var llCertosVar = ipt_ll_certos.value;
+    var llErradosVar = ipt_ll_tentados.value - ipt_ll_certos.value
+    var minutosVar = ipt_minutos.value;
+    var foulCometidasVar = ipt_foul_cometidas.value;
+    var foulSofridasVar = ipt_foul_sofridas.value;
+    var roubosBolaVar = ipt_roubos_bola.value;
+    
+    // Enviando o valor da nova input
+    fetch("/jogador/cadastrar", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        pontosServer: pontosVar,
+        assistsServer: assistsVar,
+        rebotesServer: rebotesVar,
+        tocosServer: tocosVar,
+        arrmsErradosServer: arrmsErradosVar,
+        arrmsCertosServer: arrmsCertosVar,
+        llCertosServer: llCertosVar,
+        llErradosServer: llErradosVar,
+        minutosServer: minutosVar,
+        foulCometidasServer: foulCometidasVar,
+        foulSofridasServer: foulSofridasVar,
+        roubosBolaServer: roubosBolaVar
+    })
+    }).then(function (resposta) {
+
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          alert('Cadastro realizado com sucesso')
+        } else {
+            throw ("Houve um erro ao tentar realizar o cadastro!");
+        }
+    }).catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+    });
+
+    return false;
+  }
 </script>
