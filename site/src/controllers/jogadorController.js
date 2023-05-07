@@ -67,7 +67,7 @@ function cadastrar(req, res) {
       return res.status(400).send("Os roubos de bola estão undefined!");
    }
 
-   jogadorModel.cadastrar(nome, pontos, assists, rebotes, tocos, llErrados, llCertos, arrmsErrados, arrmsCertos, foulCometidas, foulSofridas, minutos, roubosBola)
+   jogadorModel.cadastrar(nome, pontos, assists, rebotes, tocos, arrmsErrados, arrmsCertos, llErrados, llCertos, minutos, foulCometidas, foulSofridas, roubosBola)
       .then(
          function(resultado) {
             res.json(resultado);
@@ -80,7 +80,10 @@ function cadastrar(req, res) {
             );
          }
       )
+
 }
+
+
 
 module.exports = {
    testar,

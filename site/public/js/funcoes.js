@@ -1,19 +1,18 @@
 // sessão
 function validarSessao() {
     // aguardar();
-
     var email = sessionStorage.EMAIL_USUARIO;
     var nome = sessionStorage.NOME_USUARIO;
 
-    var b_usuario = document.getElementById("b_usuario");
-
     if (email != null && nome != null) {
-        // window.alert(`Seja bem-vindo, ${nome}!`);
-        b_usuario.innerHTML = nome;
+        //window.alert(`Seja bem-vindo, ${nome}!`);
+        ipt_nome_jogador.value = nome;
 
+        window.localtion = "calculadora.html"
         // finalizarAguardar();
     } else {
-        window.location = "../login.html";
+        // window.location = "index.html";
+        alert("você não está logado");
     }
 }
 
@@ -21,7 +20,7 @@ function limparSessao() {
     // aguardar();
     sessionStorage.clear();
     // finalizarAguardar();
-    window.location = "../login.html";
+    window.location = "index.html";
 }
 
 // carregamento (loading)

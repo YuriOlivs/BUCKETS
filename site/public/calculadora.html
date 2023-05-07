@@ -1,0 +1,195 @@
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>BUCKETS | Calculadora de PIE</title>
+
+   <link rel="stylesheet" href="./css/style.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+   <link rel="icon" href="assets/icons/basketball.png" type="image/x-icon">
+
+   <script src="./js/funcoes.js"></script>
+   <script src="js/script.js"></script>
+
+   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+   <div class="site-background">
+      <img src="assets/noise.png" alt="" class="noise">
+      <img src="assets/calc-background.png" alt="" class="background">
+   </div>
+   <nav id="navbar">
+      <a href="#header"><img src="assets/icons/nba-logo.svg" alt="" class="logo"></a>
+      <ul class="nav-list">
+        <li class="nav-item"><a href="#oqe">O que é PIE</a></li>
+        <li class="nav-item"><a href="#jogadores">Jogadores</a></li>
+        <li class="nav-item"><a href="calculadora.html">Cálculo de PIE</a></li>
+        <li class="nav-item"><a href="#sobre">Sobre</a></li>
+        <li class="nav-item"><a href="login.html">Login</a></li>
+      </ul>
+
+      <div id="menu" onclick="closeNav()">
+        <div id="line1"></div>
+        <div id="line2"></div>
+        <div id="line3"></div>
+      </div>
+    </nav>
+   <section id="calc">
+      <div class="calc-content">
+          <div class="calc-form">
+
+            <div class="input-box">
+               <label for="ipt_nome_jogador">Nome do jogador</label>
+               <input type="text" id="ipt_nome_jogador" placeholder="Stephen Curry">
+            </div>
+
+              <div class="flex-row">
+
+              <div class="input-box">
+                 <label for="ipt_pontos">Pontos:</label>
+                  <input type="text" id="ipt_pontos" placeholder="25">
+              </div>
+  
+              <div class="input-box">
+                 <label for="ipt_assists"> Assistências:</label>
+                  <input type="text" id="ipt_assists" placeholder="9">
+              </div>
+              </div>
+            
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_rebotes">Rebotes:</label>
+                  <input type="text" id="ipt_rebotes" placeholder="4">
+               </div>
+
+               <div class="input-box">
+                  <label for="ipt_tocos">Tocos:</label>
+                  <input type="text" id="ipt_tocos" placeholder="2">
+               </div>
+            </div>
+            
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_ll_tentados">Lances livres tentados</label>
+                  <input type="text" id="ipt_ll_tentados" placeholder="10">
+               </div>
+
+               <div class="input-box">
+                  <label for="ipt_ll_certos">Lances livros certos</label>
+                  <input type="text" id="ipt_ll_certos" placeholder="8">
+               </div>
+            </div>
+
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_arrms_tentados">Arremessos tentados</label>
+                  <input type="text" id="ipt_arrms_tentados" placeholder="8">
+               </div>
+
+               <div class="input-box">
+                  <label for="ipt_arrms_certos">Arremessos certos</label>
+                  <input type="text" id="ipt_arrms_certos" placeholder="7">
+               </div>
+            </div>
+
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_foul_cometidas">Faltas cometidas:</label>
+                  <input type="text" id="ipt_foul_cometidas" placeholder="3">
+               </div>
+
+               <div class="input-box">
+                  <label for="ipt_foul_sofridas">Faltas sofridas:</label>
+                  <input type="text" id="ipt_foul_sofridas" placeholder="5">
+               </div>
+            </div>
+
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_minutos">Minutos jogados</label>
+                   <input type="text" id="ipt_minutos" placeholder="34" onkeydown="return ( event.ctrlKey || event.altKey
+                   || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
+                   || (95<event.keyCode && event.keyCode<106)
+                   || (event.keyCode==8) || (event.keyCode==9)
+                   || (event.keyCode>34 && event.keyCode<40)
+                   || (event.keyCode==46) )" onkeypress="$(this).mask('00:00:00')" placeholder="00:00:00">
+               </div>
+
+               <div class="input-box">
+                  <label for="ipt_roubos_bola">Roubos de bola:</label>
+                  <input type="text" id="ipt_roubos_bola" placeholder="3">
+               </div>
+            </div>
+            <button onclick="cadStats()">Calcular</button>
+          </div>
+        </div>
+    </section>
+</body>
+</html>
+
+<script>
+   validarSessao();
+ 
+   function cadStats() {
+ 
+     var nomeVar = ipt_nome_jogador.value;
+     var pontosVar = ipt_pontos.value;
+     var assistsVar = ipt_assists.value;
+     var rebotesVar = ipt_rebotes.value;
+     var tocosVar = ipt_tocos.value;
+     var arrmsErradosVar = ipt_arrms_tentados.value - ipt_arrms_certos.value;
+     var arrmsCertosVar = ipt_arrms_certos.value;
+     var llCertosVar = ipt_ll_certos.value;
+     var llErradosVar = ipt_ll_tentados.value - ipt_ll_certos.value
+     var minutosVar = ipt_minutos.value;
+     var foulCometidasVar = ipt_foul_cometidas.value;
+     var foulSofridasVar = ipt_foul_sofridas.value;
+     var roubosBolaVar = ipt_roubos_bola.value;
+
+      if(nomeVar == "" || nomeVar === undefined) {
+         nomeVar = sessionStorage.NOME_USUARIO;
+      }
+
+     // Enviando o valor da nova input
+     fetch("/jogador/cadastrar", {
+     method: "POST",
+     headers: {
+         "Content-Type": "application/json"
+     },
+     body: JSON.stringify({
+         // crie um atributo que recebe o valor recuperado aqui
+         // Agora vá para o arquivo routes/usuario.js
+         nomeServer: nomeVar,
+         pontosServer: pontosVar,
+         assistsServer: assistsVar,
+         rebotesServer: rebotesVar,
+         tocosServer: tocosVar,
+         arrmsErradosServer: arrmsErradosVar,
+         arrmsCertosServer: arrmsCertosVar,
+         llCertosServer: llCertosVar,
+         llErradosServer: llErradosVar,
+         minutosServer: minutosVar,
+         foulCometidasServer: foulCometidasVar,
+         foulSofridasServer: foulSofridasVar,
+         roubosBolaServer: roubosBolaVar
+     })
+     }).then(function (resposta) {
+ 
+         console.log("resposta: ", resposta);
+ 
+         if (resposta.ok) {
+           alert('Cadastro realizado com sucesso')
+         } else {
+             throw ("Houve um erro ao tentar realizar o cadastro!");
+         }
+     }).catch(function (resposta) {
+         console.log(`#ERRO: ${resposta}`);
+     });
+ 
+     return false;
+   }
+ </script>

@@ -24,7 +24,7 @@
       <ul class="nav-list">
         <li class="nav-item"><a href="#oqe">O que é PIE</a></li>
         <li class="nav-item"><a href="#jogadores">Jogadores</a></li>
-        <li class="nav-item"><a href="#calculo">Cálculo de PIE</a></li>
+        <li class="nav-item"><a href="calculadora.html">Cálculo de PIE</a></li>
         <li class="nav-item"><a href="#sobre">Sobre</a></li>
         <li class="nav-item"><a href="login.html">Login</a></li>
       </ul>
@@ -110,103 +110,15 @@
         <img src="assets/oqe-background.svg" alt="" class="background">
       </div>
     </section>
-    <section id="calc">
-      <div class="calc-content">
-          <div class="calc-titles">
-            <h2 class="title">Calculadora de PIE</h2>
-            <h2 class="title">Calculadora de PIE</h2>
-          </div>
-          <div class="calc-form">
-            <label for="ipt_nome">
-              Nome do jogador
-              <input type="text" id="ipt_nome" placeholder="Stephen Curry">
-            </label>
 
-              <div class="flex-row">
-              <label for="ipt_pontos">
-                Pontos:
-                <input type="text" id="ipt_pontos" placeholder="25">
-              </label>
-  
-              <label for="ipt_assists">
-                Assistências:
-                <input type="text" id="ipt_assists" placeholder="9">
-              </label>
-              </div>
-            
-            <div class="flex-row">
-              <label for="ipt_rebotes">
-                Rebotes:
-                <input type="text" id="ipt_rebotes" placeholder="4">
-              </label>
-              <label for="ipt_tocos">
-                Tocos:
-                <input type="text" id="ipt_tocos" placeholder="2">
-              </label>
-            </div>
-            
-            <div class="flex-row">
-              <label for="ipt_ll_tentados">
-                Lances livres tentados
-                <input type="text" id="ipt_ll_tentados" placeholder="10">
-              </label>
-              <label for="ipt_ll_certos">
-                Lances livros certos
-                <input type="text" id="ipt_ll_certos" placeholder="8">
-              </label>
-            </div>
-
-            <div class="flex-row">
-              <label for="ipt_arrms_tentados">
-                Arremessos tentados
-                <input type="text" id="ipt_arrms_tentados" placeholder="8">
-              </label>
-              <label for="ipt_arrms_certos">
-                Arremessos certos
-                <input type="text" id="ipt_arrms_certos" placeholder="7">
-              </label>
-            </div>
-
-            <div class="flex-row">
-              <label for="ipt_foul_cometidas">
-                Faltas cometidas:
-                <input type="text" id="ipt_foul_cometidas" placeholder="3">
-              </label>
-
-              <label for="ipt_foul_sofridas">
-                Faltas sofridas:
-                <input type="text" id="ipt_foul_sofridas" placeholder="5">
-              </label>
-            </div>
-
-            <div class="flex-row">
-              <label for="ipt_minutos">
-                Minutos jogados
-                <input type="text" id="ipt_minutos" placeholder="34">
-              </label>
-              <label for="ipt_roubos_bola">
-                Roubos de bola:
-                <input type="text" id="ipt_roubos_bola" placeholder="3">
-              </label>
-            </div>
-          </div>
-          <button onclick="cadStats()">Calcular</button>
-        </div>
-
-        <!-- <div class="site-background">
-          <img src="assets/noise.png" alt="" class="noise">
-          <img src="assets/calc-background.png" alt="" class="background">
-        </div> -->
-    </section>
-
-    <!-- <section id="jogadores">
+    <section id="jogadores">
       <div class="header-jogadores">
         <div class="title">Os 10 melhores jogadores na <br> corrida para mvp</div>
         <p>
           Acompanhe as estatísticas dos 10 jogadores mais bem cotados na corrida para o prêmio Kia MVP da NBA. Veja como eles se comparam em pontos, assistências, rebotes e, claro, o índice PIE de cada um deles!
         </p>
       </div>
-    </section> -->
+    </section>
     <section id="time">
 
     </section>
@@ -216,60 +128,3 @@
   </main>
 </body>
 </html>
-
-<script>
-  function cadStats() {
-
-    var nomeVar = ipt_nome.value;
-    var pontosVar = ipt_pontos.value;
-    var assistsVar = ipt_assists.value;
-    var rebotesVar = ipt_rebotes.value;
-    var tocosVar = ipt_tocos.value;
-    var arrmsErradosVar = ipt_arrms_tentados.value - ipt_arrms_certos.value;
-    var arrmsCertosVar = ipt_arrms_certos.value;
-    var llCertosVar = ipt_ll_certos.value;
-    var llErradosVar = ipt_ll_tentados.value - ipt_ll_certos.value
-    var minutosVar = ipt_minutos.value;
-    var foulCometidasVar = ipt_foul_cometidas.value;
-    var foulSofridasVar = ipt_foul_sofridas.value;
-    var roubosBolaVar = ipt_roubos_bola.value;
-    
-    // Enviando o valor da nova input
-    fetch("/jogador/cadastrar", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomeServer: nomeVar,
-        pontosServer: pontosVar,
-        assistsServer: assistsVar,
-        rebotesServer: rebotesVar,
-        tocosServer: tocosVar,
-        arrmsErradosServer: arrmsErradosVar,
-        arrmsCertosServer: arrmsCertosVar,
-        llCertosServer: llCertosVar,
-        llErradosServer: llErradosVar,
-        minutosServer: minutosVar,
-        foulCometidasServer: foulCometidasVar,
-        foulSofridasServer: foulSofridasVar,
-        roubosBolaServer: roubosBolaVar
-    })
-    }).then(function (resposta) {
-
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          alert('Cadastro realizado com sucesso')
-        } else {
-            throw ("Houve um erro ao tentar realizar o cadastro!");
-        }
-    }).catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-    });
-
-    return false;
-  }
-</script>

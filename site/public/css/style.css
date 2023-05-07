@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,600;900;1,500;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 :root {
   --main-padding: 100px;
@@ -13,7 +13,8 @@
   /* cores */
   --gray-500: #616161;
   --gray-800: #212121;
-  --blue: #4D89FF;
+  --blue-500: #4D89FF;
+  --blue-800: #142340;
 }
 
 html {
@@ -57,14 +58,28 @@ nav {
   transition: .7s all ease-out;
 }
 
-label {
+.input-box {
   display: flex;
   flex-direction: column;
   gap: 4px;
   border-radius: 8px;
-  padding: 8px 12px;
-  color: var(--gray-500);
+  padding: 8px 10px;
   background-color: #212121;
+  border: 1px solid #212121;
+  transition: background-color .2s ease-in-out, border .2s ease-in-out;
+}
+
+.input-box:focus-within {
+  background-color: #292929;
+  border: 1px solid var(--gray-500);
+}
+
+.input-box:focus-within input{
+  background-color: #292929;
+}
+
+label {
+  color: var(--gray-500);
 }
 
 input {
@@ -72,6 +87,12 @@ input {
   border: none;
   outline: none;
   color: white;
+  transition: background-color .2s ease-in-out;
+}
+
+.label-focus {
+  border: 1px solid white;
+  background-color: #2b2b2b;
 }
 
 .flex-row {
@@ -457,27 +478,46 @@ input {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  width: 32%;
+  width: 400px;
   box-sizing: border-box;
 }
 
 .calc-form label{
   width: 180px !important;
+  box-sizing: border-box;
 }
 
 .calc-form label:first-child {
-  width: 100%;
+  width: 100% !important;
 }
 
 .calc-form .flex-row {
-  justify-content: space-between;
-  gap: 12px;
+  gap: 10px;
 }
 
-#calc .site-background {
-  border: 1px solid white;
-  position: absolute !important;
-  top: 0;
+.calc-form button {
+  background-color: var(--blue-500);
+  color: var(--blue-800);
+  border: none;
+  padding: 8px  16px;
+  font-size: 20px;
+  font-weight: 800;
+  font-family: var(--title-font);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color .4s ease-in-out, border .2s ease-in-out;
+  border: 1px solid var(--blue-500);
+}
+
+.calc-form button:hover {
+  border: 1px solid var(--blue-800);
+  background-color: #719ef7;
+}
+
+.calc-form button:focus {
+  outline: none;
+  border: 1px solid var(--blue-800);
+  background-color: #719ef7;
 }
 
 /* animações

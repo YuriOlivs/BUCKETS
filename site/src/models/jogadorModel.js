@@ -18,7 +18,7 @@ function cadastrar(nome, pontos, assists, rebotes, tocos, arrmsErrados, arrmsCer
 
    var instrucao2 = `
       INSERT INTO stats (pontos, assists, rebotes, tocos, arrmsErrados, arrmsCertos, lancesLivresCertos, lancesLivresErrados, minutosJogados, faltasCometidas, faltasSofridas, roubosBola, dataStat, fkJogador) 
-      VALUES (${pontos}, ${assists}, ${rebotes}, ${tocos}, ${arrmsErrados}, ${arrmsCertos}, ${llCertos}, ${llErrados}, ${minutos}, ${foulCometidas}, ${foulSofridas}, ${roubosBola}, CURDATE(), (SELECT idJogador FROM jogador WHERE jogador.nome = '${nome}'));
+      VALUES (${pontos}, ${assists}, ${rebotes}, ${tocos}, ${arrmsErrados}, ${arrmsCertos}, ${llCertos}, ${llErrados}, '${minutos}', ${foulCometidas}, ${foulSofridas}, ${roubosBola}, CURDATE(), (SELECT idJogador FROM jogador WHERE jogador.nome = '${nome}'));
    `;
 
    console.log("Executando a instrução SQL: \n" + instrucao);

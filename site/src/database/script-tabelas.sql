@@ -25,7 +25,7 @@ CREATE TABLE jogador(
 ); 
 
 CREATE TABLE stats( 
-	idStats INT PRIMARY KEY AUTO_INCREMENT, 
+	idStats INT AUTO_INCREMENT, 
     pontos FLOAT, 
     assists FLOAT, 
     rebotes FLOAT, 
@@ -40,7 +40,8 @@ CREATE TABLE stats(
     roubosBola FLOAT,
     dataStat DATE, 
     fkJogador INT,	 
-    CONSTRAINT fkJogadorStats FOREIGN KEY (fkJogador) REFERENCES jogador(idJogador) 
+    CONSTRAINT fkJogadorStats FOREIGN KEY (fkJogador) REFERENCES jogador(idJogador),
+    PRIMARY KEY (idStats, fkJogador)
 ); 
 
 INSERT INTO franquia 
