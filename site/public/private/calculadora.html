@@ -62,13 +62,13 @@
             
             <div class="flex-row">
                <div class="input-box">
-                  <label for="ipt_rebotes">Rebotes:</label>
-                  <input type="text" id="ipt_rebotes" placeholder="4">
+                  <label for="ipt_rebotes">Rebotes (Defensivos):</label>
+                  <input type="text" id="ipt_rebotes_def" placeholder="4">
                </div>
 
                <div class="input-box">
-                  <label for="ipt_tocos">Tocos:</label>
-                  <input type="text" id="ipt_tocos" placeholder="2">
+                  <label for="ipt_rebotes">Rebotes (Ofensivos):</label>
+                  <input type="text" id="ipt_rebotes_off" placeholder="4">
                </div>
             </div>
             
@@ -124,7 +124,19 @@
                   <input type="text" id="ipt_roubos_bola" placeholder="3">
                </div>
             </div>
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_tocos">Tocos:</label>
+                  <input type="text" id="ipt_tocos" placeholder="2">
+               </div>
+               
+               <div class="input-box">
+                  <label for="ipt_turnovers">Turnovers:</label>
+                  <input type="text" id="ipt_turnovers" placeholder="3">
+               </div>
+            </div>
             <button onclick="cadStats()">Calcular</button>
+            </div>
           </div>
         </div>
     </section>
@@ -133,14 +145,17 @@
 
 <script>
    validarSessao();
- 
+
    function cadStats() {
- 
-      const nomeVar = ipt_nome_jogador.value,
+      if(nomeVar == "" || nomeVar === undefined) {
+         nomeVar = sessionStorage.NOME_USUARIO;
+      }
+
+      var nomeVar = ipt_nome_jogador.value,
          pontosVar = ipt_pontos.value,
          assistsVar = ipt_assists.value,
-         rebotesVar = ipt_rebotes.value,
-         tocosVar = ipt_tocos.value,
+         rebotesDefVar = ipt_rebotes_def.value,
+         rebotesOffVar = ipt_rebotes_off.value,
          arrmsErradosVar = ipt_arrms_tentados.value - ipt_arrms_certos.value,
          arrmsCertosVar = ipt_arrms_certos.value,
          llCertosVar = ipt_ll_certos.value,
@@ -149,11 +164,8 @@
          foulCometidasVar = ipt_foul_cometidas.value,
          foulSofridasVar = ipt_foul_sofridas.value,
          roubosBolaVar = ipt_roubos_bola.value;
-
-      if(nomeVar == "" || nomeVar === undefined) {
-         nomeVar = sessionStorage.NOME_USUARIO;
-      }
-
+         tocosVar = ipt_tocos.value,
+         turnoversVar = ipt_turnovers.value
      // Enviando o valor da nova input
      fetch("/stats/cadastrar", {
      method: "POST",
@@ -166,8 +178,8 @@
          nomeServer: nomeVar,
          pontosServer: pontosVar,
          assistsServer: assistsVar,
-         rebotesServer: rebotesVar,
-         tocosServer: tocosVar,
+         rebotesDefServer: rebotesDefVar,
+         rebotesOffServer: rebotesOffVar,
          arrmsErradosServer: arrmsErradosVar,
          arrmsCertosServer: arrmsCertosVar,
          llCertosServer: llCertosVar,
@@ -175,7 +187,9 @@
          minutosServer: minutosVar,
          foulCometidasServer: foulCometidasVar,
          foulSofridasServer: foulSofridasVar,
-         roubosBolaServer: roubosBolaVar
+         roubosBolaServer: roubosBolaVar,
+         tocosServer: tocosVar,
+         turnoversServer: turnoversVar
      })
      }).then(function (resposta) {
  

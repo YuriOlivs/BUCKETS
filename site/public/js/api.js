@@ -1,8 +1,6 @@
-var jogadorData = {};
-
-function getPlayerData() {
-   const xhr = new XMLHttpRequest();
-   xhr.open('GET', `https://www.balldontlie.io/api/v1/players/237`);
+function getPlayerData(nome_jogador, callback) {
+   const xhr = new XMLHttpRequest(nome_jogador);
+   xhr.open('GET', `https://www.balldontlie.io/api/v1/players?search=${nome_jogador}`);
 
    xhr.onload = function() {
       const jogadorJSON = JSON.parse(xhr.response);
@@ -12,18 +10,14 @@ function getPlayerData() {
       var posicaoJogadorVar = jogadorJSON.data[0].position;
       var timeJogadorVar = jogadorJSON.data[0].team.abbreviation;   
 
-      jogadorData = {
+      const jogadorData = {
          nome: nomeJogadorVar,
          posicao: posicaoJogadorVar,
          time: timeJogadorVar
       };
-   }
 
+      callback(jogadorData);
+   }
    xhr.send();
 };
 
-getPlayerData();
-
-export default {
-   jogadorData
-}

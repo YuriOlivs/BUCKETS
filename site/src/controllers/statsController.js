@@ -24,12 +24,12 @@ function listar(req, res) {
       );
 }
 
-function cadastrar(req, res) {r
+function cadastrar(req, res) {
    var nome = req.body.nomeServer;
    var pontos = req.body.pontosServer;
    var assists = req.body.assistsServer;
-   var rebotes = req.body.rebotesServer;
-   var tocos = req.body.tocosServer;
+   var rebotesDef = req.body.rebotesDefServer;
+   var rebotesOff = req.body.rebotesOffServer;
    var arrmsErrados = req.body.arrmsErradosServer;
    var arrmsCertos = req.body.arrmsCertosServer;
    var llCertos = req.body.llCertosServer;
@@ -38,6 +38,8 @@ function cadastrar(req, res) {r
    var foulCometidas = req.body.foulCometidasServer;
    var foulSofridas = req.body.foulSofridasServer;
    var roubosBola = req.body.roubosBolaServer;
+   var tocos = req.body.tocosServer;
+   var turnovers = req.body.turnoversServer;
 
    if (nome === undefined) {
       return res.status(400).send("O nome está undefined!");
@@ -45,8 +47,10 @@ function cadastrar(req, res) {r
       return res.status(400).send("Os pontos estão undefined!");
    } else if (assists === undefined) {
       return res.status(400).send("Os assists estão undefined!");
-   } else if (rebotes === undefined) {
-      return res.status(400).send("Os rebotes estão undefined!");
+   } else if (rebotesDef === undefined) {
+      return res.status(400).send("Os rebotes defensivos estão undefined!");
+   } else if (rebotesOff === undefined) {
+      return res.status(400).send("Os rebotes ofensivos estão undefined!");
    } else if (tocos === undefined) {
       return res.status(400).send("Os tocos estão undefined!");
    } else if (llErrados === undefined) {
@@ -65,9 +69,11 @@ function cadastrar(req, res) {r
       return res.status(400).send("Os minutos estão undefined!");
    } else if (roubosBola === undefined) {
       return res.status(400).send("Os roubos de bola estão undefined!");
+   } else if(turnovers === undefined) {
+      return res.statuss(400).send("Os turnovers estão undefined!")
    }
 
-   statsModel.cadastrar(nome, pontos, assists, rebotes, tocos, arrmsErrados, arrmsCertos, llErrados, llCertos, minutos, foulCometidas, foulSofridas, roubosBola)
+   statsModel.cadastrar(nome, pontos, assists, rebotesDef, rebotesOff, arrmsErrados, arrmsCertos, llErrados, llCertos, minutos, foulCometidas, foulSofridas, roubosBola, tocos, turnovers)
       .then(
          function(resultado) {
             res.json(resultado);

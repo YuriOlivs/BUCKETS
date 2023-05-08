@@ -1,4 +1,3 @@
-import jogadorData from '../api'
 var jogadorModel = require("../models/jogadorModel");
 
 var sessoes =  [];
