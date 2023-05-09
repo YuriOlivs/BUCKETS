@@ -21,25 +21,30 @@ CREATE TABLE franquia(
 CREATE TABLE jogador( 
 	idJogador INT PRIMARY KEY AUTO_INCREMENT, 
     nome VARCHAR(100), 
-    posicao VARCHAR(2),
+    posicao VARCHAR(2)
+    /*
     fkFranquia INT, 
     FOREIGN KEY (fkFranquia) REFERENCES franquia(idFranquia) 
+    */
 ); 
 
 CREATE TABLE stats( 
 	idStats INT AUTO_INCREMENT, 
     pontos FLOAT, 
     assists FLOAT, 
-    rebotes FLOAT, 
-    tocos FLOAT, 
+    rebotesDef FLOAT, 
+    rebotesOff FLOAT, 
     arrmsErrados FLOAT, 
     arrmsCertos FLOAT, 
     lancesLivresCertos FLOAT, 
     lancesLivresErrados FLOAT, 
-    minutosJogados TIME, 
+	minutosJogados TIME, 
     faltasCometidas FLOAT, 
     faltasSofridas FLOAT, 
     roubosBola FLOAT,
+	tocos FLOAT, 
+    turnovers FLOAT,
+    pie FLOAT,
     dataStat DATE, 
     fkJogador INT,	 
     CONSTRAINT fkJogadorStats FOREIGN KEY (fkJogador) REFERENCES jogador(idJogador),
@@ -83,6 +88,8 @@ SELECT * FROM usuario;
 SELECT * FROM jogador;
 SELECT * FROM franquia;
 SELECT * FROM stats;
+
+drop table stats, jogador, usuario;
 
 SELECT * FROM jogador JOIN franquia 
 	ON fkFranquia = idFranquia 

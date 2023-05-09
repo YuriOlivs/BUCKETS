@@ -40,6 +40,7 @@ function cadastrar(req, res) {
    var roubosBola = req.body.roubosBolaServer;
    var tocos = req.body.tocosServer;
    var turnovers = req.body.turnoversServer;
+   var pie = req.body.pieServer;
 
    if (nome === undefined) {
       return res.status(400).send("O nome está undefined!");
@@ -70,10 +71,12 @@ function cadastrar(req, res) {
    } else if (roubosBola === undefined) {
       return res.status(400).send("Os roubos de bola estão undefined!");
    } else if(turnovers === undefined) {
-      return res.statuss(400).send("Os turnovers estão undefined!")
+      return res.status(400).send("Os turnovers estão undefined!")
+   } else if(pie === undefined) {
+      return res.status(400).send("O índice PIE está undefined!")
    }
 
-   statsModel.cadastrar(nome, pontos, assists, rebotesDef, rebotesOff, arrmsErrados, arrmsCertos, llErrados, llCertos, minutos, foulCometidas, foulSofridas, roubosBola, tocos, turnovers)
+   statsModel.cadastrar(nome, pontos, assists, rebotesDef, rebotesOff, arrmsErrados, arrmsCertos, llErrados, llCertos, minutos, foulCometidas, foulSofridas, roubosBola, tocos, turnovers, pie)
       .then(
          function(resultado) {
             res.json(resultado);

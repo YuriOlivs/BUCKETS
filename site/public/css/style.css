@@ -74,26 +74,18 @@ nav {
   border: 1px solid var(--gray-500);
 }
 
-.input-box:focus-within input{
-  background-color: #292929;
-}
-
 label {
   color: var(--gray-500);
 }
 
 input {
-  background-color: #212121;
+  background-color: transparent;
   border: none;
   outline: none;
   color: white;
   transition: background-color .2s ease-in-out;
 }
 
-.label-focus {
-  border: 1px solid white;
-  background-color: #2b2b2b;
-}
 
 .flex-row {
   display: flex;

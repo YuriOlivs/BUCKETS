@@ -3,6 +3,14 @@ validarSessao();
 var jogador = {};
 var time = {};
 
+function limparInputs() {
+    var inputs = document.querySelectorAll("input[type=text]");
+
+    for(let i=0; i < inputs.length; i++) {
+        inputs[i].value = '';
+    }
+}
+
 function getJogadorStats() {
    jogador = {
       nome: ipt_nome_jogador.value,
@@ -14,7 +22,7 @@ function getJogadorStats() {
       arrmsCert: Number(ipt_arrms_certos.value),
       llErr: Number(ipt_ll_certos.value) - Number(ipt_ll_tentados.value),
       llCert: Number(ipt_ll_tentados.value),
-      minutos: Number(minutos),
+      minutos: ipt_minutos.value,
       foulComet: Number(ipt_foul_cometidas.value),
       foulSofri:  Number(ipt_foul_sofridas.value),
       roubosBola: Number(ipt_roubos_bola.value),
@@ -23,6 +31,9 @@ function getJogadorStats() {
    }
 
    console.log(jogador);
+   ipt_nome_jogador.disabled = true;
+   iptbox_nome_jogador.style.backgroundColor  = '#292929'
+   limparInputs();
    btnCalc.setAttribute("onclick", "getTeamStats()");
 }
 
@@ -36,7 +47,7 @@ function getTeamStats() {
       arrmsCert: Number(ipt_arrms_certos.value),
       llErr: Number(ipt_ll_certos.value) - Number(ipt_ll_tentados.value),
       llCert: Number(ipt_ll_tentados.value),
-      minutos: Number(minutos),
+      minutos: ipt_minutos.value,
       foulComet: Number(ipt_foul_cometidas.value),
       foulSofri:  Number(ipt_foul_sofridas.value),
       roubosBola: Number(ipt_roubos_bola.value),
@@ -45,13 +56,14 @@ function getTeamStats() {
    }
 
    console.log(time);
+   limparInputs();
    btnCalc.setAttribute("onclick", "calcPIE()");
 }
 
 function calcPIE() {
    // var efcJogador = (pontosJogador + assistsJogador + offRebotesJogador + defRebotesJogador + tocosJogador + foulSofridasJogador + roubosBolaJogador) - (arrmsErradosJogador + llErradosJogador + errosJogador +foulCometidasJogador)         
    var pie =  (jogador.pontos + jogador.arrmsCert + jogador.llCert - jogador.arrmsErr - jogador.llErr + jogador.rebotesDef + jogador.rebotesOff/2 + jogador.assists + jogador.roubosBola + jogador.tocos/2 - jogador.foulComet - jogador.turnovers) / (time.pontos + time.arrmsCert + time.llCert - time.arrmsErr - time.llErr + time.rebotesDef + time.rebotesOff/2 + time.assists + time.roubosBola + time.tocos/2 - time.foulComet - time.turnovers)
-   pie =  pie.toFixed(2) * 100+'%';
+   pie =  pie.toFixed(2);
    
    return pie;
 }
@@ -79,7 +91,7 @@ function cadStats() {
       roubosBolaServer: jogador.roubosBola,
       tocosServer: jogador.tocos,
       turnoversServer: jogador.turnovers,
-      pieServer: calcularPIE()
+      pieServer: calcPIE()
   })
   }).then(function (resposta) {
 
