@@ -58,6 +58,8 @@ function getTeamStats() {
    console.log(time);
    limparInputs();
    btnCalc.setAttribute("onclick", "calcPIE()");
+
+   cadStats();
 }
 
 function calcPIE() {
