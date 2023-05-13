@@ -67,6 +67,7 @@ nav {
   background-color: #212121;
   border: 1px solid #212121;
   transition: background-color .2s ease-in-out, border .2s ease-in-out;
+  height: fit-content;
 }
 
 .input-box:focus-within {
@@ -453,41 +454,34 @@ input {
 
 #calc {
   position: relative;
+  display: flex;
+  justify-content: space-between;
   width: 100%;
-  height: 100vh;
-}
-
-.calc-content {
-  padding: var(--main-padding);
-}
-
-.calc-titles h2:first-child{
-  color: transparent;
-  -webkit-text-stroke: 1px #4D89FF;
+  height: 100%;
+  gap: 50px;
+  padding: calc(var(--main-padding) * 0.9) calc(var(--main-padding) * 0.5);
+  box-sizing: border-box;
 }
 
 .calc-form {
+  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  width: fit-content;
   box-sizing: border-box;
+  justify-content: space-between;
+  height: 100%;
+  /* background-color: aqua; */
 }
 
-.calc-form label{
-  width: 180px !important;
+.calc-form .input-box label{
   box-sizing: border-box;
-}
-
-.calc-form label:first-child {
-  width: 100% !important;
 }
 
 .calc-form .flex-row {
   gap: 10px;
 }
 
-.calc-form button {
+.btn {
   background-color: var(--blue-500);
   color: var(--blue-800);
   border: none;
@@ -501,113 +495,175 @@ input {
   border: 1px solid var(--blue-500);
 }
 
-.calc-form button:hover {
+.btn:hover {
   border: 1px solid var(--blue-800);
   background-color: #719ef7;
 }
 
-.calc-form button:focus {
+.btn:focus {
   outline: none;
   border: 1px solid var(--blue-800);
   background-color: #719ef7;
 }
 
-/* animações
-.slideInDown {
-  animation: slideInDown .5s ease-out;
-} */
-
-/* @keyframes slideInDown {
-  from {
-    opacity: 0;
-    transform: translate3d(0, -200%, 0)
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0)
-  }
+.user-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  /* background-color: blue; */
 }
 
-.slideInRight {
-  animation: slideInRight .5s ease-out;
+.player-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  box-sizing: border-box;
+  /* background-color: blue; */
 }
 
-@keyframes slideInRight {
-  from {
-    opacity: 0;
-    transform: translate3d(-200%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
+.player-form .input-box {
+  width: 95%;
+  z-index: 1;
+  position: absolute;
+  top: 85%;
 }
 
-.slideInLeft {
-  animation: slideInLeft .5s ease-out;
-}
-
-@keyframes slideInLeft {
-  from {
-    opacity: 0;
-    transform: translate3d(200%, 0, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-  }
-}
-
-.slideInUp {
-  animation: slideInUp .5s ease;
-}
-
-@keyframes slideInUp {
-  from {
-    opacity: 0;
-    transform: translate3d(0, 200%, 0);
-  }
-  to {
-    opacity: 1;
-    transform: translate3d(0, 0, 0);
-    transform: ;
-  }
-}  */
-
-#sp_search_jogador {
-  background-color: #292929;
-  color: white;
-}
-
-.input-box button {
+.suggestion-btn {
   width: 100%;
   background: none;
   color: white;
+  font-weight: bold;
   border: none;
   text-align: left;
   margin: 0;
   padding: 4px 0;
-  font-size: 16px;
+  font-size: 14px;
 }
 
-.input-box button:focus {
+.suggestion-btn:focus {
   background-color: #383838;
   border: none;
   outline: none;
 }
 
-#btn_search {
+#grafics {
+  display: flex;
   width: 100%;
-  margin-top: 8px;
-  background-color: var(--blue-500);
-  color: var(--blue-800);
-  border: none;
-  padding: 8px  16px;
-  font-size: 16px;
+  height: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+  /* background-color: red; */
+}
+
+.user-data, .player-data {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  width: 49%;
+  height: 100%;
+  background: #212121a6;  
+  box-shadow: 0 8px 32px 0 #2121215e;
+  backdrop-filter: blur( 10px );
+  -webkit-backdrop-filter: blur( 10px );
+  border-radius: 10px;
+  border: 1px solid #6161612e;
+  color: white;
+  border-radius: 16px;
+  box-sizing: border-box;
+  padding: 20px 24px;
+  z-index: 10;
+}
+
+.user-data, .player-data h2 {
+  font-family: var(--title-font);
+}
+
+.data-player {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  gap: 12px;
+}
+
+.data-player .flex-row {
+  width: 100%;
+  justify-content: space-between;
+  box-sizing: border-box;
+  margin: 12px 0;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+}
+
+.stat-data {
+  font-size: 2.5em;
   font-weight: 800;
   font-family: var(--title-font);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color .4s ease-in-out, border .2s ease-in-out;
-  border: 1px solid var(--blue-500);
 }
+
+
+/*// Glow Border Animation //*/
+
+.animated-border-box, .animated-border-box-glow{
+  max-height: 200px;
+  max-width: 250px;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  overflow: hidden; 
+  z-index: 0;
+  /* Border Radius */
+	border-radius: 10px;
+}
+
+.animated-border-box-glow{
+  overflow: hidden;
+  filter: blur(20px);
+}
+
+.animated-border-box:before, .animated-border-box-glow:before {
+  content: '';
+  z-index: -2;
+  text-align: center;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%) rotate(0deg);
+  position: absolute;
+	width: 200%;
+	height: 200%;
+	background-repeat: no-repeat;
+	background-position: 0 0;
+  /*border color, change middle color*/
+	background-image: conic-gradient(rgba(0,0,0,0), var(--blue-500), rgba(0,0,0,0) 25%);
+  /* change speed here */
+
+}
+
+.animated-border-box:after {
+	content: '';
+	position: absolute;
+	z-index: -1;
+  /* border width */
+	left: 5px;
+	top: 5px;
+  /* double the px from the border width left */
+	width: calc(100% - 10px);
+	height: calc(100% - 10px);
+  /*bg color*/
+	background: #292a2e;
+  /*box border radius*/
+	border-radius: 7px;
+}
+
+@keyframes rotate {
+	100% {
+		transform: translate(-50%, -50%) rotate(1turn);
+	}
+}
+

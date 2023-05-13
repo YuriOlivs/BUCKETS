@@ -2,6 +2,8 @@
    
 var jogador = {};
 var time = {};
+var idJogador;
+var nomeJogador;
 
 function limparInputs() {
     var inputs = document.querySelectorAll("input[type=text]");
@@ -34,7 +36,7 @@ function getJogadorStats() {
    ipt_nome_jogador.disabled = true;
    iptbox_nome_jogador.style.backgroundColor  = '#292929'
    limparInputs();
-   btnCalc.setAttribute("onclick", "getTeamStats()");
+   btn_calc.setAttribute("onclick", "getTeamStats()");
 }
 
 function getTeamStats() {
@@ -57,7 +59,7 @@ function getTeamStats() {
 
    console.log(time);
    limparInputs();
-   btnCalc.setAttribute("onclick", "calcPIE()");
+   btn_calc.setAttribute("onclick", "calcPIE()");
 
    cadStats();
 }
@@ -71,6 +73,7 @@ function calcPIE() {
 }
 
 function cadStats() {
+   showUserStats();
 
   fetch("/stats/cadastrar", {
   method: "POST",
@@ -113,14 +116,17 @@ function cadStats() {
 
 function selectPlayer1() {
     ipt_search_jogador.value = btn_select_player1.innerText;
+    sp_search_jogador.innerHTML = ``;
 }
 
 function selectPlayer2() {
     ipt_search_jogador.value = btn_select_player2.innerText;
+    sp_search_jogador.innerHTML = ``;
 }
 
 function selectPlayer3() {
     ipt_search_jogador.value = btn_select_player3.innerText;
+    sp_search_jogador.innerHTML = ``;
 }
 
 function showPlayer() {
@@ -137,21 +143,46 @@ function showPlayer() {
           sp_search_jogador.innerHTML = ``;
        } else if(!jogadorData.nomes[1]) {
           sp_search_jogador.innerHTML = `
-             <button class="btn_select_player1" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button>
+             <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button>
           `;
        } else if(!jogadorData.nomes[2]) {
           sp_search_jogador.innerHTML = `
-             <button id="btn_select_player1" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
-             <button id="btn_select_player2" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button>
+             <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
+             <button id="btn_select_player2" class="suggestion-btn" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button>
           `;
        } else  {
           sp_search_jogador.innerHTML = `
-             <button id="btn_select_player1" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
-             <button id="btn_select_player2" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button> <br>
-             <button id="btn_select_player3" onclick="selectPlayer3()">${jogadorData.nomes[2]}</button> <br>
+             <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
+             <button id="btn_select_player2" class="suggestion-btn" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button> <br>
+             <button id="btn_select_player3" class="suggestion-btn" onclick="selectPlayer3()">${jogadorData.nomes[2]}</button> <br>
           `;
        }
 
-       getPlayerStats(jogadorData.ids[0]);
+       idJogador = jogadorData.ids[0];
+       nomeJogador = jogadorData.nomes[0];
     });
+ }
+
+ ipt_search_jogador.addEventListener('input', showPlayer);
+ ipt_search_jogador.addEventListener('blur', selectPlayer1);
+ btn_search.addEventListener('click', function() {
+   getPlayerStats(idJogador, nomeJogador);
+ });
+
+ function showUserStats() {
+   user_nome.innerText = jogador.nome;
+   user_pts.innerText = jogador.pontos;
+   user_ast.innerText = jogador.assists;
+   user_stl.innerText = jogador.roubosBola;
+   user_oreb.innerText = jogador.rebotesOff;
+   user_dreb.innerText = jogador.rebotesDef;
+   user_fga.innerText = jogador.arrmsCert + jogador.arrmsErr;
+   user_fgm.innerText = jogador.arrmsCert;
+   user_blk.innerText = jogador.tocos;
+   user_fta.innerText = jogador.llCert + jogador.llErr;
+   user_ftm.innerText = jogador.llCert;
+   user_pf.innerText = jogador.foulComet;
+   user_fs.innerText = jogador.foulSofri;
+   user_to.innerText = jogador.turnovers;
+   user_min.innerText = jogador.minutos;
  }
