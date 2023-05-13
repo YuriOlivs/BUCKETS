@@ -12,13 +12,14 @@
    <script src="../js/funcoes.js"></script>
    <script src="../js/script.js"></script>
    <script src="../js/calculadora.js"></script>
+   <script src="../js/api.js"></script>
 
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="display: flex;">
    <div class="site-background">
       <img src="../assets/noise.png" alt="" class="noise">
       <img src="../assets/calc-background.png" alt="" class="background">
@@ -139,6 +140,14 @@
             </div>
           </div>
         </div>
+    </section>
+    <section id="grafico" style="margin-right: 100px; margin-top: 100px;">
+      <div class="input-box">
+         <label for="ipt_search_jogador">Selecione um jogador</label>
+         <input type="text" id="ipt_search_jogador" oninput="showPlayer()" style="z-index: 2;" maxlength="59">
+         <div id="sp_search_jogador"></div>
+      </div>
+      <button id="btn_search">Pesquisar jogador</button>
     </section>
 </body>
 </html>

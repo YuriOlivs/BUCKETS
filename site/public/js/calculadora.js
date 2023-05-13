@@ -1,4 +1,4 @@
-validarSessao();
+// validarSessao();
    
 var jogador = {};
 var time = {};
@@ -110,3 +110,48 @@ function cadStats() {
 
   return false;
 }
+
+function selectPlayer1() {
+    ipt_search_jogador.value = btn_select_player1.innerText;
+}
+
+function selectPlayer2() {
+    ipt_search_jogador.value = btn_select_player2.innerText;
+}
+
+function selectPlayer3() {
+    ipt_search_jogador.value = btn_select_player3.innerText;
+}
+
+function showPlayer() {
+    var searchJogador = ipt_search_jogador.value.toLowerCase();
+    searchJogador = searchJogador.replaceAll(' ', '_');
+    // console.log(searchJogador);
+
+    getPlayerData(searchJogador, function() {
+        if(ipt_search_jogador.value == jogadorData.nomes[0]) {
+          sp_search_jogador.innerHTML = ``;
+       } else if(ipt_search_jogador.value == '') {
+          sp_search_jogador.innerHTML = ``;
+       } else if(!jogadorData.nomes[0]) {
+          sp_search_jogador.innerHTML = ``;
+       } else if(!jogadorData.nomes[1]) {
+          sp_search_jogador.innerHTML = `
+             <button class="btn_select_player1" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button>
+          `;
+       } else if(!jogadorData.nomes[2]) {
+          sp_search_jogador.innerHTML = `
+             <button id="btn_select_player1" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
+             <button id="btn_select_player2" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button>
+          `;
+       } else  {
+          sp_search_jogador.innerHTML = `
+             <button id="btn_select_player1" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
+             <button id="btn_select_player2" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button> <br>
+             <button id="btn_select_player3" onclick="selectPlayer3()">${jogadorData.nomes[2]}</button> <br>
+          `;
+       }
+
+       getPlayerStats(jogadorData.ids[0]);
+    });
+ }
