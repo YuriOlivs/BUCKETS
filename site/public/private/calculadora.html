@@ -13,11 +13,25 @@
    <script src="../js/script.js" defer></script>
    <script src="../js/calculadora.js" defer></script>
    <script src="../js/api.js" defer></script>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
 
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
 <body style="display: flex; overflow: hidden;">
+   <div id="modal_erro">
+      <div class="modal-bar"></div>
+      <div>
+         <img src="../assets/icons/sinal-de-aviso.png" alt="">
+      </div>
+      <div class="modal-text">
+         <h4>Erro</h4>
+         <span>Não possuímos dados sobre o jogador <span id="nome_erro"></span> no ano de <span id="ano_erro"></span>. O jogador pode não ter jogado durante este ano ou não temos esta informação</span>
+      </div>
+      <div id="close_modal">
+         <img src="../assets/icons/botao-excluir.png" alt="">
+      </div>
+   </div>
    <div class="site-background">
       <img src="../assets/noise.png" alt="" class="noise">
       <img src="../assets/calc-background.png" alt="" class="background">
@@ -111,10 +125,18 @@
          </div>
 
          <div class="player-form">
-            <div class="input-box">
-               <label for="ipt_search_jogador">Escolha um jogador</label>
-               <input type="text" id="ipt_search_jogador" style="z-index: 2;" maxlength="59">
-               <div id="sp_search_jogador"></div>
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_search_jogador">Digite um jogador</label>
+                  <input type="text" id="ipt_search_jogador" style="z-index: 2;" maxlength="59" placeholder="Seu nome">
+                  <div id="sp_search_jogador"></div>
+               </div>
+               <div class="input-box">
+                  <label for="slct_ano_stats">Selecione um ano</label>
+                  <select name="slct_ano_stats" id="slct_ano_stats">
+                     <option value="">Selecionar ano</option>
+                  </select>
+               </div>
             </div>
             <button id="btn_search" class="btn">Pesquisar jogador</button>
          </div>
@@ -199,6 +221,9 @@
              </div>
          </div>
        </div>
+       <div class="chart-container">
+          <canvas id="user_chart"></canvas>
+       </div>
       </div>
       <div class="player-data">
          <h2>Estatísticas do jogador</h2>
@@ -229,6 +254,7 @@
                   <span>DREB</span>
                   <span class="stat-data" id="player_dreb">00</span>
                 </div>
+                <hr>
                 <div class="stats">
                   <span>FGA</span>
                   <span class="stat-data" id="player_fga">00</span>
@@ -275,10 +301,10 @@
                   <span class="stat-data" id="player_min">00:00</span>
                 </div>
             </div>
-
-            <!-- <div class="animated-border-box-glow"></div>
-            <div class="animated-border-box"></div> -->
-       </div>       
+         </div>       
+         <div class="chart-container">
+            <canvas id="player_chart"></canvas>
+         </div>
    </div>
    </section>
 </body>
