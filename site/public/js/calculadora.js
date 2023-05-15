@@ -202,7 +202,7 @@ function showUserStats() {
 
 // RENDERIZAR OPÇÕES
 function renderOptions() {
-   for(let i = 1946; i < 2023; i++)  {
+   for(let i = 2022; i > 1946; i--)  {
       var option = document.createElement("option");
       option.setAttribute("value", i);
       option.text = i;
