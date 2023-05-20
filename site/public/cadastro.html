@@ -39,6 +39,20 @@
         </div>
       </nav>
 
+      <div id="modal_success">
+        <div class="modal-bar-success"></div>
+        <div>
+           <img src="../assets/icons/sucesso.png" alt="">
+        </div>
+        <div class="modal-text">
+           <h4>Sucesso!</h4>
+           <span>Seu cadastro foi realizado com sucesso! Redirecionando para a tela de login    </span>
+        </div>
+        <div id="close_modal">
+           <div class="loader"></div>
+        </div>
+     </div>
+
     <div class="content-login">
         <div class="form-login">
             <h2>Cadastro</h2>
@@ -79,44 +93,41 @@
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
             alert("Todos os campos estão em branco")
-
             return false;
         }
         else {
-            setInterval(alert('sla zé'), 5000)
+            fetch("/usuarios/cadastrar", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    nomeServer: nomeVar,
+                    emailServer: emailVar,
+                    senhaServer: senhaVar
+                })
+            }).then(function (resposta) {
+
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    modal_success.style.top = '12%';
+
+                    setTimeout(() => {
+                        modal_success.style.top = '-100%';
+                        window.location = "login.html";
+                    }, "2500")
+
+                    limparFormulario();
+                } else {
+                    throw ("Houve um erro ao tentar realizar o cadastro!");
+                }
+            }).catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+            });
         }
-
-        // Enviando o valor da nova input
-        fetch("/usuarios/cadastrar", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomeServer: nomeVar,
-                emailServer: emailVar,
-                senhaServer: senhaVar
-            })
-        }).then(function (resposta) {
-
-            console.log("resposta: ", resposta);
-
-            if (resposta.ok) {
-                alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
-
-                setTimeout(() => {
-                    window.location = "login.html";
-                }, "2000")
-
-                limparFormulario();
-            } else {
-                throw ("Houve um erro ao tentar realizar o cadastro!");
-            }
-        }).catch(function (resposta) {
-            console.log(`#ERRO: ${resposta}`);
-        });
 
         return false;
     }

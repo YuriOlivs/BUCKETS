@@ -760,3 +760,75 @@ select::-webkit-scrollbar-thumb {
   left: 50%;
   transform: translateX(-50%);
 }
+
+#modal_success {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  position: absolute; 
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  right: calc(var(--main-padding) / 2);
+  opacity: 1;
+  width: 30vw;
+  background-color: #c7ebc4;
+  color: #2eac38;
+  padding: 8px 18px;
+  border-radius: 8px;
+  transition: all .6s;
+  z-index: 3;
+  text-align: justify;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+#modal_success img {
+  width: 30px;
+  margin-top: 6px;
+}
+
+#close_modal img{
+  width: 20px !important;
+  cursor: pointer;
+}
+
+#modal_success h4 {
+  font-size: 13px;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.modal-bar-success {
+  position: absolute;
+  width: 2%;
+  height: 100%;
+  background-color: #2eac38;
+  left: 0%;
+  border-radius: 8px 0 0 8px;
+}
+
+.modal-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.loader {
+  position: relative;
+  width: 25px;
+  height: 25px;
+  border: 5px solid #c7ebc4;
+  border-top-color: #2eac38;
+  border-radius: 50%;
+  animation: loading .8s linear infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
