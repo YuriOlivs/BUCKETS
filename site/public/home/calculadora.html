@@ -38,6 +38,23 @@
    </div>
    <section id="calc">
       <div class="calc-form">
+         <div class="player-form">
+            <div class="flex-row">
+               <div class="input-box">
+                  <label for="ipt_search_jogador">Digite um jogador</label>
+                  <input type="text" id="ipt_search_jogador" style="z-index: 2;" maxlength="59" placeholder="Seu nome">
+                  <div id="sp_search_jogador"></div>
+               </div>
+               <div class="input-box">
+                  <label for="slct_ano_stats">Selecione um ano</label>
+                  <select name="slct_ano_stats" id="slct_ano_stats">
+                     <option value="">Selecionar ano</option>
+                  </select>
+               </div>
+            </div>
+            <button id="btn_search" class="btn">Pesquisar jogador</button>
+         </div>
+         
          <div class="user-form">
             <div class="input-box" id="iptbox_nome_jogador">
                <label for="ipt_nome_jogador">Nome do jogador</label>
@@ -122,23 +139,6 @@
                </div>
             </div>
             <button onclick="getJogadorStats()" id="btn_calc" class="btn">Calcular</button>
-         </div>
-
-         <div class="player-form">
-            <div class="flex-row">
-               <div class="input-box">
-                  <label for="ipt_search_jogador">Digite um jogador</label>
-                  <input type="text" id="ipt_search_jogador" style="z-index: 2;" maxlength="59" placeholder="Seu nome">
-                  <div id="sp_search_jogador"></div>
-               </div>
-               <div class="input-box">
-                  <label for="slct_ano_stats">Selecione um ano</label>
-                  <select name="slct_ano_stats" id="slct_ano_stats">
-                     <option value="">Selecionar ano</option>
-                  </select>
-               </div>
-            </div>
-            <button id="btn_search" class="btn">Pesquisar jogador</button>
          </div>
    </div>
    </div>

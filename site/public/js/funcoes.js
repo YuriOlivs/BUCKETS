@@ -7,11 +7,11 @@ function validarSessao() {
         //window.alert(`Seja bem-vindo, ${nome}!`);
         ipt_nome_jogador.placeholder = user;
 
-        window.localtion = "private/calculadora.html"
+        window.localtion = "home/calculadora.html"
         // finalizarAguardar();
     } else {
         // window.location = "../index.html";
-        alert("você não está logado");
+        // alert("você não está logado");
     }
 }
 
@@ -24,8 +24,7 @@ function limparSessao() {
 
 // carregamento (loading)
 function aguardar() {
-    var divAguardar = document.getElementById("div_aguardar");
-    divAguardar.style.display = "flex";
+    
 }
 
 function finalizarAguardar(texto) {

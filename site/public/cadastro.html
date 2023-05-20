@@ -6,74 +6,70 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>AquaTech | Cadastro</title>
+    <title>BUCKETS | Cadastro</title>
 
 
     <script src="./js/funcoes.js"></script>
+    <script src="./js/script.js"></script>
 
-
-    <link rel="icon" href/../assets/icon/favicon2.ico">
-    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" href="assets/icons/basketball.png">
+    <link rel="stylesheet" href="./css/style.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 </head>
 
-<body>
-
-    <div class="login">
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-        <div class="container">
-            <div class="card card-cadastro">
-                <h2>Bem-vindo!</h2>
-                <div class="formulario">
-
-                    <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
-
-                    <div class="campo">
-                        <span>Nome:</span>
-                        <input id="nome_input" type="text" placeholder="Seu nome">
-                    </div>
-                    <div class="campo">
-                        <span>User:</span>
-                        <input id="email_input" type="text" placeholder="usuario123">
-                    </div>
-                    <div class="campo">
-                        <span>Senha:</span>
-                        <input id="senha_input" type="password" placeholder="******">
-                    </div>
-                    <div class="campo">
-                        <span>Confirmação da Senha:</span>
-                        <input id="confirmacao_senha_input" type="password" placeholder="******">
-                    </div>
-                    <button class="botao" onclick="cadastrar()">Cadastrar</button>
-
-                </div>
-                <div id="div_aguardar" class="loading-div">
-                    <img src="./assets/circle-loading.gif" id="loading-gif">
-                </div>
-
-                <div id="div_erros_login"></div>
-            </div>
-        </div>
+<body style="overflow: hidden;">
+    <div class="site-background">
+        <img src="assets/noise.png" alt="" class="noise">
+        <img src="assets/login-background.png" alt="" class="background">
     </div>
 
+    <nav id="navbar">
+        <a href="#header"><img src="assets/icons/nba-logo.svg" alt="" class="logo"></a>
+        <ul class="nav-list login-list">
+        <li class="nav-item"><a href="index.html">Home</a></li>
+          <li class="nav-item"><a href="login.html">Login</a></li>
+          <li class="nav-item"><a href="cadastro.html">Cadastro</a></li>
+        </ul>
+  
+        <div id="menu" onclick="closeNav()">
+          <div id="line1"></div>
+          <div id="line2"></div>
+          <div id="line3"></div>
+        </div>
+      </nav>
+
+    <div class="content-login">
+        <div class="form-login">
+            <h2>Cadastro</h2>
+            <span>Faça seu cadastro e análise e compare seu desempenho com desempenho dos principais jogadores da maior liga de basquete do mundo!</span>
+            <div class="inputs-container">
+                <div class="input-box">
+                    <label for="nome_input">Nome:</label>
+                    <input id="nome_input" type="text" placeholder="LeBron James">
+                </div>
+                <div class="input-box">
+                    <label for="email_input">User:</label>
+                    <input id="email_input" type="text" placeholder="kdlover123">
+                </div>
+                <div class="input-box">
+                    <label for="senha_input">Senha:</label>
+                    <input id="senha_input" type="password" placeholder="******">
+                </div>
+                <div class="input-box">
+                    <label for="confimacao_senha_input">Confirmação da Senha:</label>
+                    <input id="confirmacao_senha_input" type="password" placeholder="******">
+                </div>
+            </div>
+            <button class="btn" onclick="cadastrar()">Cadastrar</button>
+        </div>
+    </div>
 </body>
 
 </html>
 
 <script>
     function cadastrar() {
-        aguardar();
-
         //Recupere o valor da nova input pelo nome do id
         // Agora vá para o método fetch logo abaixo
         var nomeVar = nome_input.value;
@@ -82,14 +78,12 @@
         var confirmacaoSenhaVar = confirmacao_senha_input.value;
 
         if (nomeVar == "" || emailVar == "" || senhaVar == "" || confirmacaoSenhaVar == "") {
-            cardErro.style.display = "block"
-            mensagem_erro.innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            alert("Todos os campos estão em branco")
 
-            finalizarAguardar();
             return false;
         }
         else {
-            setInterval(sumirMensagem, 5000)
+            setInterval(alert('sla zé'), 5000)
         }
 
         // Enviando o valor da nova input
@@ -110,29 +104,20 @@
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
-                cardErro.style.display = "block";
-
-                mensagem_erro.innerHTML = "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+                alert("Cadastro realizado com sucesso! Redirecionando para tela de Login...");
 
                 setTimeout(() => {
                     window.location = "login.html";
                 }, "2000")
 
                 limparFormulario();
-                finalizarAguardar();
             } else {
                 throw ("Houve um erro ao tentar realizar o cadastro!");
             }
         }).catch(function (resposta) {
             console.log(`#ERRO: ${resposta}`);
-            finalizarAguardar();
         });
 
         return false;
     }
-
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
-
 </script>

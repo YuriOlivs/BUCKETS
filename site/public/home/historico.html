@@ -26,3 +26,22 @@
    </div>
 </body>
 </html>
+
+<script>
+   function showUserStats() {
+      fetch('/stats/listar', {
+         method: 'GET',
+         heahders: {
+            "Content-type": "application/json"
+         }
+      }).then(function (resposta) {
+         if(resposta.ok) {
+            alert('teste');
+         } else {
+            throw('Houve um erro na API');
+         }
+      })
+   }
+
+   showUserStats();
+</script>

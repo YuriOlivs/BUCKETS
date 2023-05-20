@@ -93,3 +93,14 @@ function closeNav() {
     }
 }
 
+function showPassword() {
+    var inputsSenha = document.querySelectorAll("input[password]");
+    console.log(inputsSenha)
+    for(let i = 0; i < inputsSenha.length; i++) {
+        if(inputsSenha[i].type == "password") {
+            inputsSenha[i].type = "text";
+        } else {
+            inputsSenha[i].type = "password";
+        }
+    }
+}

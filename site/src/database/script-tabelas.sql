@@ -89,8 +89,6 @@ SELECT * FROM jogador;
 SELECT * FROM franquia;
 SELECT * FROM stats;
 
-drop table stats, jogador, usuario;
-
 SELECT * FROM jogador JOIN franquia 
 	ON fkFranquia = idFranquia 
 		WHERE conferencia = 'Oeste'; 

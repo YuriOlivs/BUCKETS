@@ -5,6 +5,7 @@ var time = {};
 var idJogador;
 var nomeJogador;
 var anoStats;
+var keyCheck = false;
 
 function closeModal() {
    modal_erro.style.top = '-100%'
@@ -140,38 +141,47 @@ function selectPlayer3() {
    sp_search_jogador.innerHTML = ``;
 }
 
+
+
 function showPlayer() {
    var searchJogador = ipt_search_jogador.value.toLowerCase();
    searchJogador = searchJogador.replaceAll(' ', '_');
-   // console.log(searchJogador);
 
-   getPlayerData(searchJogador, anoStats, function() {
-      if(ipt_search_jogador.value == jogadorData.nomes[0]) {
-         sp_search_jogador.innerHTML = ``;
-      } else if(ipt_search_jogador.value == '') {
-         sp_search_jogador.innerHTML = ``;
-      } else if(!jogadorData.nomes[0]) {
-         sp_search_jogador.innerHTML = ``;
-      } else if(!jogadorData.nomes[1]) {
-         sp_search_jogador.innerHTML = `
-            <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button>
-         `;
-      } else if(!jogadorData.nomes[2]) {
-         sp_search_jogador.innerHTML = `
-            <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
-            <button id="btn_select_player2" class="suggestion-btn" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button>
-         `;
-      } else  {
-         sp_search_jogador.innerHTML = `
-            <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
-            <button id="btn_select_player2" class="suggestion-btn" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button> <br>
-            <button id="btn_select_player3" class="suggestion-btn" onclick="selectPlayer3()">${jogadorData.nomes[2]}</button> <br>
-         `;
-      }
+   setTimeout(function() {
+      getPlayerData(searchJogador, anoStats, function() {
+         if(ipt_search_jogador.value == jogadorData.nomes[0]) {
+            sp_search_jogador.innerHTML = ``;
+         } else if(ipt_search_jogador.value == '') {
+            sp_search_jogador.innerHTML = ``;
+         } else if(!jogadorData.nomes[0]) {
+            sp_search_jogador.innerHTML = ``;
+         } else if(!jogadorData.nomes[1]) {
+            sp_search_jogador.innerHTML = `
+               <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button>
+            `;
+         } else if(!jogadorData.nomes[2]) {
+            sp_search_jogador.innerHTML = `
+               <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
+               <button id="btn_select_player2" class="suggestion-btn" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button>
+            `;
+         } else  {
+            sp_search_jogador.innerHTML = `
+               <button id="btn_select_player1" class="suggestion-btn" onclick="selectPlayer1()">${jogadorData.nomes[0]}</button> <br>
+               <button id="btn_select_player2" class="suggestion-btn" onclick="selectPlayer2()">${jogadorData.nomes[1]}</button> <br>
+               <button id="btn_select_player3" class="suggestion-btn" onclick="selectPlayer3()">${jogadorData.nomes[2]}</button> <br>
+            `;
+         }
+   
+         idJogador = jogadorData.ids[0];
+         nomeJogador = jogadorData.nomes[0];
+      });
+   }, 1000);
+}
 
-      idJogador = jogadorData.ids[0];
-      nomeJogador = jogadorData.nomes[0];
-   });
+function enterKeyPressed(e) {
+   if(e.keyCode == 13) {
+      selectPlayer1();
+   }
 }
 
 function showUserStats() {
@@ -231,6 +241,8 @@ var chartOption = {
     }
 }
 
+var teste = [1, 2,3 ,5 ,6]
+
 var ctxUser = document.getElementById('user_chart').getContext('2d');
 var userChart = new Chart(ctxUser, {
   type: 'radar',
@@ -263,8 +275,10 @@ var playerChart = new Chart(ctxPlayer, {
   options: chartOption
 });
 
+
 // ADICIONANDO AS FUNÇÕES AOS ELEMENTOS
 ipt_search_jogador.addEventListener('input', showPlayer);
+ipt_search_jogador.addEventListener('keydown', enterKeyPressed);
 ipt_search_jogador.addEventListener('blur', selectPlayer1);
 slct_ano_stats.addEventListener('change', selectAno);
 close_modal.addEventListener('click', closeModal)

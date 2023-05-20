@@ -81,9 +81,9 @@ select option  {
 .input-box {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 2px;
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   background-color: #212121;
   border: 1px solid #212121;
   transition: background-color .2s ease-in-out, border .2s ease-in-out;
@@ -96,7 +96,7 @@ select option  {
 }
 
 label {
-  color: var(--gray-500);
+  color: var(--gray-500) !important;
 }
 
 input {
@@ -564,7 +564,7 @@ select::-webkit-scrollbar-thumb {
   z-index: 1;
   position: absolute; 
   left: 0;
-  top: 84.6%;
+  top: 0;
 }
 
 .suggestion-btn {
@@ -695,4 +695,68 @@ select::-webkit-scrollbar-thumb {
 .chart-container {
   width: 100%;
   height: 100%;
+}
+
+.content-login {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  padding: calc(var(--main-padding) * 0.2) 0;
+}
+
+.inputs-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2vh;
+}
+
+.form-login {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: white;
+  padding: 20px 26px;
+  border-radius: 10px;
+  width: 100%;
+  z-index: 1;
+}
+
+.form-login .input-box {
+  width: 25vw;
+}
+
+.form-login h2 {
+  width: 100%;
+  font-size: 2rem;
+  text-align: center;
+  text-transform: uppercase;
+  font-family: var(--title-font);
+  font-weight: 800;
+}
+
+.form-login span {
+  width: 40vw;
+  color: white;
+  text-align: center;
+  margin-bottom: 2.5vh;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
+
+.form-login .btn{
+  width: 26vw;
+  margin-top: 2.5vh;
+}
+
+.login-list {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
