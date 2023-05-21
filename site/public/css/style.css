@@ -3,6 +3,7 @@
 
 :root {
   --main-padding: 100px;
+  --dash-padding: calc(var(--main-padding) * 0.8) calc(var(--main-padding) * 0.5) calc(var(--main-padding) * 0.5) calc(var(--main-padding) * 0.5);
   --b-radius-1: 8px;
 
   --b-radius-2: 16px;
@@ -62,8 +63,8 @@ select {
   margin: 0;
   padding: 0;
   font-size: 14px;
-  background-color: #212121;
-  border: 1px solid #212121;
+  background-color: var(--gray-800);
+  border: 1px solid var(--gray-800);
   transition: background-color .2s ease-in-out, border .2s ease-in-out;
   color: white;
 }
@@ -84,8 +85,8 @@ select option  {
   gap: 2px;
   border-radius: 8px;
   padding: 6px 8px;
-  background-color: #212121;
-  border: 1px solid #212121;
+  background-color: var(--gray-800);
+  border: 1px solid var(--gray-800);
   transition: background-color .2s ease-in-out, border .2s ease-in-out;
   height: fit-content;
 }
@@ -479,7 +480,7 @@ input {
   width: 100%;
   height: 100%;
   gap: 50px;
-  padding: calc(var(--main-padding) * 0.9) calc(var(--main-padding) * 0.5);
+  padding: var(--dash-padding);
   box-sizing: border-box;
 }
 
@@ -539,7 +540,7 @@ select::-webkit-scrollbar {
 }
 
 select::-webkit-scrollbar-track {
-  background-color: #212121;
+  background-color: var(--gray-800);
 }
 
 select::-webkit-scrollbar-thumb {
@@ -601,7 +602,7 @@ select::-webkit-scrollbar-thumb {
   gap: 30px;
   width: 49%;
   height: 100%;
-  background: #212121;  
+  background: var(--gray-800);  
   border-radius: 10px;
   border: 1px solid #6161612e;
   color: white;
