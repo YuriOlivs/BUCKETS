@@ -29,7 +29,7 @@ function getPlayerData(nome_jogador, ano, callback) {
    xhr.send();
 };
 
-function getPlayerStats(id_jogador, nome_jogador, ano, funcao) {
+function getPlayerStats(id_jogador, nome_jogador, ano) {
    const xhr = new XMLHttpRequest();
    xhr.open('GET', `https://www.balldontlie.io/api/v1/season_averages?season=${ano}&player_ids[]=${id_jogador}`);
 

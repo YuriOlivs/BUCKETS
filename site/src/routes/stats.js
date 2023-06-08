@@ -7,12 +7,36 @@ router.get("/", function (req, res) {
    statsController.testar(req, res);
 });
 
-router.get("/listar", function (req, res) {
+router.get("/listar/:idUsuario", function (req, res) {
    statsController.listar(req, res);
 });
 
 router.post("/cadastrar", function(req, res) {
    statsController.cadastrar(req, res);
+});
+
+router.get("/listarPIE/:idUsuario", function (req, res) {
+   statsController.listarPIE(req, res);
+});
+
+router.get("/listarAbaixoDaMedia/:idUsuario", function (req, res) {
+   statsController.listarAbaixoDaMedia(req, res);
+});
+
+router.get("/listarAcimaDaMedia/:idUsuario", function (req, res) {
+   statsController.listarAcimaDaMedia(req, res);
+});
+
+router.get("/listarNaMedia/:idUsuario", function (req, res) {
+   statsController.listarNaMedia(req, res);
+});
+
+router.get("/listarPontos/:idUsuario", function (req, res) {
+   statsController.listarPontos(req, res);
+});
+
+router.get("/listarDatasStats/:idUsuario", function (req, res) {
+   statsController.listarDatasStats(req, res);
 });
 
 module.exports = router;

@@ -9,14 +9,17 @@
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
    <link rel="icon" href="../assets/icons/basketball.png" type="image/x-icon">
 
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
+   <script src="https://unpkg.com/popper.js@1" defer></script>
+   <script src="https://unpkg.com/tippy.js@5" defer></script>
    <script src="../js/funcoes.js" defer></script>
    <script src="../js/script.js" defer></script>
    <script src="../js/calculadora.js" defer></script>
    <script src="../js/api.js" defer></script>
-   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
 
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+   <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
 <body style="display: flex; overflow: hidden;">
    <div class="site-background">
@@ -39,6 +42,7 @@
    <section id="calc">
       <div class="calc-form">
          <div class="player-form">
+            <span>Escolha um jogador para fazer uma comparação com as suas estatísticas!</span>
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_search_jogador">Digite um jogador</label>
@@ -56,6 +60,7 @@
          </div>
          
          <div class="user-form">
+            <span>Insira suas estatísticas e compare seu desempenho com o desempenho do jogador escolhido!</span>
             <div class="input-box" id="iptbox_nome_jogador">
                <label for="ipt_nome_jogador">Nome do jogador</label>
                <input type="text" id="ipt_nome_jogador" placeholder="Stephen Curry">
@@ -73,11 +78,17 @@
             
             <div class="flex-row">
                <div class="input-box">
-                  <label for="ipt_rebotes">Rebotes (Defensivos):</label>
+                  <label for="ipt_rebotes">
+                     Rebotes (Defensivos):
+                     <i class="ph ph-info tooltip tooltip-input" id="ipt_dreb_tooltip"></i>
+                  </label>
                   <input type="text" id="ipt_rebotes_def" placeholder="4">
                </div>
                <div class="input-box">
-                  <label for="ipt_rebotes">Rebotes (Ofensivos):</label>
+                  <label for="ipt_rebotes">
+                     Rebotes (Ofensivos):
+                     <i class="ph ph-info tooltip tooltip-input" id="ipt_oreb_tooltip"></i>
+                  </label>
                   <input type="text" id="ipt_rebotes_off" placeholder="4">
                </div>
             </div>
@@ -134,7 +145,10 @@
                </div>
             
                <div class="input-box">
-                  <label for="ipt_turnovers">Turnovers:</label>
+                  <label for="ipt_turnovers">
+                     Turnovers:
+                     <i class="ph ph-info tooltip tooltip-input" id="ipt_to_tooltip"></i>
+                  </label>
                   <input type="text" id="ipt_turnovers" placeholder="3">
                </div>
             </div>
@@ -149,73 +163,73 @@
         <div class="data-player">
          <span id="user_nome">nome usuario</span>
          <div class="flex-row">
-            <div class="stats">
+            <div class="stats" id="pts_tooltip">
                <span>PTS</span>
                <span class="stat-data" id="user_pts">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="ast_tooltip">
                <span>AST</span>
                <span class="stat-data" id="user_ast">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="stl_tooltip">
                <span>STL</span>
                <span class="stat-data" id="user_stl">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="oreb_tooltip">
                <span>OREB</span>
                <span class="stat-data" id="user_oreb">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="dreb_tooltip">
                <span>DREB</span>
                <span class="stat-data" id="user_dreb">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="fga_tooltip">
                <span>FGA</span>
                <span class="stat-data" id="user_fga">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="fgm_tooltip">
                <span>FGM</span>
                <span class="stat-data" id="user_fgm">00</span>
              </div>
          </div>
          <div class="flex-row">
-            <div class="stats">
+            <div class="stats" id="blk_tooltip">
                <span>BLK</span>
                <span class="stat-data" id="user_blk">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="fta_tooltip">
                <span>FTA</span>
                <span class="stat-data" id="user_fta">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="ftm_tooltip">
                <span>FTM</span>
                <span class="stat-data" id="user_ftm">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="pf_tooltip">
                <span>PF</span>
                <span class="stat-data" id="user_pf">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="fs_tooltip">
                <span>FS</span>
                <span class="stat-data" id="user_fs">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="to_tooltip">
                <span>TO</span>
                <span class="stat-data" id="user_to">00</span>
              </div>
              <hr>
-             <div class="stats">
+             <div class="stats" id="min_tooltip">
                <span>MIN</span>
                <span class="stat-data" id="user_min">00:00</span>
              </div>

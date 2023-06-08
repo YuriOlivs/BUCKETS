@@ -25,7 +25,7 @@ function listar(req, res) {
 }
 
 function cadastrar(req, res) {
-   var nome = req.body.nomeServer;
+   var idUsuario = req.body.idUsuarioServer;
    var pontos = req.body.pontosServer;
    var assists = req.body.assistsServer;
    var rebotesDef = req.body.rebotesDefServer;
@@ -42,9 +42,7 @@ function cadastrar(req, res) {
    var turnovers = req.body.turnoversServer;
    var pie = req.body.pieServer;
 
-   if (nome === undefined) {
-      return res.status(400).send("O nome está undefined!");
-   } else if (pontos === undefined) {
+   if (pontos === undefined) {
       return res.status(400).send("Os pontos estão undefined!");
    } else if (assists === undefined) {
       return res.status(400).send("Os assists estão undefined!");
@@ -76,7 +74,7 @@ function cadastrar(req, res) {
       return res.status(400).send("O índice PIE está undefined!")
    }
 
-   statsModel.cadastrar(nome, pontos, assists, rebotesDef, rebotesOff, arrmsErrados, arrmsCertos, llErrados, llCertos, minutos, foulCometidas, foulSofridas, roubosBola, tocos, turnovers, pie)
+   statsModel.cadastrar(pontos, assists, rebotesDef, rebotesOff, arrmsCertos, arrmsErrados, llCertos, llErrados, minutos, foulCometidas, foulSofridas, roubosBola, tocos, turnovers, pie, idUsuario)
       .then(
          function(resultado) {
             res.json(resultado);
@@ -92,10 +90,92 @@ function cadastrar(req, res) {
 
 }
 
+function listarPIE(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarPIE(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
 
+function listarDatasStats(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarDatasStats(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
+function listarAcimaDaMedia(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarAcimaDaMedia(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
+function listarNaMedia(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarNaMedia(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
+function listarAbaixoDaMedia(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarAbaixoDaMedia(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
+function listarPontos(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarPontos(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
 
 module.exports = {
    testar,
    listar,
-   cadastrar
+   cadastrar,
+   listarPIE,
+   listarAbaixoDaMedia,
+   listarAcimaDaMedia,
+   listarNaMedia,
+   listarDatasStats,
+   listarPontos
 }

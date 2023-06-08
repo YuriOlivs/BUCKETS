@@ -12,21 +12,102 @@ function listar() {
    return database.executar(instrucao);
 }
 
-function cadastrar(nome, pontos, assists, rebotesDef, rebotesOff, tocos, arrmsErrados, arrmsCertos, llCertos, llErrados, minutos, foulCometidas, foulSofridas, roubosBola, turnovers, pie) {
+function cadastrar(pontos, assists, rebotesDef, rebotesOff, arrmsCertos, arrmsErrados, lancesLivresCertos, lancesLivresErrados, minutosJogador, faltasCometidas, faltasSofridas, roubosBola, tocos, turnovers, pie,idUsuario) {
    var instrucao = `
-   INSERT INTO jogador (nome) VALUES ('${nome}');
-   `;
-
-   var instrucao2 = `
-      INSERT INTO stats (pontos, assists, rebotesDef, rebotesOff, tocos, lancesLivresCertos, lancesLivresErrados, arrmsErrados, arrmsCertos, minutosJogados, faltasCometidas, faltasSofridas, roubosBola, turnovers, pie, dataStat, fkJogador) 
-      VALUES (${pontos}, ${assists}, ${rebotesDef}, ${rebotesOff}, ${tocos}, ${llCertos}, ${llErrados}, ${arrmsErrados}, ${arrmsCertos}, '${minutos}', ${foulCometidas}, ${foulSofridas}, ${roubosBola}, ${turnovers}, ${pie}, CURDATE(), (SELECT idJogador FROM jogador WHERE jogador.nome = '${nome}'));
+   INSERT INTO stats (pontos, assists, rebotesDef, rebotesOff, arrmsCertos, arrmsErrados, lancesLivresCertos, lancesLivresErrados, minutosJogados, faltasCometidas, faltasSofridas, roubosBola, tocos, turnovers, pie, dataStat, fkJogador) 
+      VALUES (${pontos}, ${assists}, ${rebotesDef}, ${rebotesOff}, ${arrmsCertos}, ${arrmsErrados}, ${lancesLivresCertos}, ${lancesLivresErrados}, '${minutosJogador}', ${faltasCometidas}, ${faltasSofridas}, ${roubosBola}, ${tocos}, ${turnovers}, ${pie}, CURDATE(), ${idUsuario});
    `;
 
    console.log("Executando a instrução SQL: \n" + instrucao);
-   return database.executar(instrucao), database.executar(instrucao2);
+   return database.executar(instrucao);
 }
+function listarPIE(idUsuario) {
+   var instrucao = `
+      SELECT dataStat, pie FROM stats 
+      JOIN usuario ON fkJogador = usuario.id
+      WHERE usuario.id = ${idUsuario}
+      GROUP BY dataStat
+      LIMIT 10;
+   `;
+
+   console.log("Executando a instrução SQL: \n" + instrucao);
+   return database.executar(instrucao); 
+}
+
+function listarAcimaDaMedia(idUsuario) {
+   var instrucao = `
+   
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
+function listarAcimaDaMedia(idUsuario) {
+   var instrucao = `
+   SELECT COUNT(pie) as qtd_acima FROM stats
+   JOIN usuario ON fkJogador = usuario.id
+   WHERE usuario.id = ${idUsuario} AND pie > 0.13;
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
+function listarNaMedia(idUsuario) {
+   var instrucao = `
+   SELECT COUNT(pie) as qtd_media FROM stats
+   JOIN usuario ON fkJogador = usuario.id
+   WHERE usuario.id = ${idUsuario} AND 
+   pie BETWEEN 0.12 AND 0.14;
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
+function listarAbaixoDaMedia(idUsuario) {
+   var instrucao = `
+   SELECT COUNT(pie) as qtd_abaixo FROM stats
+   JOIN usuario ON fkJogador = usuario.id
+   WHERE usuario.id = ${idUsuario} AND pie < 0.12;
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
+
+function listarDatasStats(idUsuario) {
+   var instrucao = `
+   SELECT DATE_FORMAT(dataStat, '%d/%m/%y') as datas, idStats as dataStat FROM stats
+   JOIN usuario ON fkJogador = usuario.id
+   WHERE usuario.id = ${idUsuario};
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
+function listarPontos(idUsuario) {
+   var instrucao = `
+   SELECT pontos, DATE_FORMAT(dataStat, "%d/%m/%y") as dataStat FROM stats 
+   JOIN usuario ON fkJogador = ${idUsuario}
+   WHERE usuario.id = 100
+   LIMIT 12;
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}  
 
 module.exports = {
    listar,
    cadastrar,
+   listarPIE,
+   listarDatasStats,
+   listarAbaixoDaMedia,
+   listarAcimaDaMedia,
+   listarNaMedia,
+   listarPontos
 }

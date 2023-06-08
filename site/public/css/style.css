@@ -80,6 +80,7 @@ select option  {
 }
 
 .input-box {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -94,6 +95,12 @@ select option  {
 .input-box:focus-within {
   background-color: #292929;
   border: 1px solid var(--gray-500);
+}
+
+.input-box label {
+  display: flex;
+  align-items: center;
+  gap: 2px;
 }
 
 label {
@@ -535,6 +542,13 @@ input {
   /* background-color: blue; */
 }
 
+.user-form,
+.player-form span {
+  color: white;
+  width: 100%;
+  max-width: 400px;
+}
+
 select::-webkit-scrollbar {
   width: 5px;
 }
@@ -565,7 +579,6 @@ select::-webkit-scrollbar-thumb {
   z-index: 1;
   position: absolute; 
   left: 0;
-  top: 0;
 }
 
 .suggestion-btn {
@@ -832,4 +845,22 @@ select::-webkit-scrollbar-thumb {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.tooltip {
+  color: var(--gray-500);
+  font-weight: 600;
+}
+
+.tooltip.tooltip-input {
+  font-size: 14px;
+}
+
+.white {
+  color: white;
+  border-color: white;
+}
+
+.smaller {
+  font-size: 8px;
 }
