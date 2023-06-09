@@ -13,14 +13,14 @@
 
    <script src="../js/funcoes.js" defer></script>
    <script src="../js/script.js" defer></script>
-   <script src="../js/historico.js" defer></script>
+   <script src="../js/dashboard.js" defer></script>
    <script src="../js/api.js" defer></script>
    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.6.0"></script>
 
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 </head>
-<body style="overflow: hidden;">
+<body style="overflow: hidden;" onload="renderCharts()">
    <div class="site-background">
       <img src="../assets/noise.png" alt="" class="noise">
       <img src="../assets/calc-background.png" alt="" class="background">
@@ -28,29 +28,28 @@
 
    <div class="content">
       <div id="grid_hist">
-            <div class="grid-item grid-item1">
-               <div class="input-box">
-                  <label for="slct_stats">Selecione uma estatística</label>
-                  <select name="select_stats" id="slct_stats">
-                     <option value="">Selecionar</option>
-                  </select>
-               </div>
-               <div class="container">
-                  
-               </div>
+            <div class="grid-item">
                <div class="container container-chart">
+                  <h5>Índices PIE registrados nas últimas partidas</h5>
                   <canvas id="pie_historico"></canvas>
                </div>
             </div>
             <div class="grid-item grid-item2">
                <div class="container">
+                  
                </div>
             </div>
             <div class="grid-item grid-item3">
-               <div class="container"></div>
+               <div class="container">
+                  <h5>Quantidade de índices PIE acima, abaixo ou na média (12)</h5>
+                  <canvas id="medias_historico"></canvas>
+               </div>
             </div>
             <div class="grid-item grid-item4">
-               <div class="container"></div>
+               <div class="container">
+                  <h5>Histórico de pontos registrados nas últimas partidas</h5>
+                  <canvas id="pontos_historico"></canvas>
+               </div>
             </div>
       </div>
    </div>

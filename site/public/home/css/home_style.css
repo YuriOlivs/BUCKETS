@@ -36,14 +36,7 @@ label {
    align-items: center;
    text-align: center;
    border-radius: 8px;
-}
-
-.grid-item1 {
-   display: grid;
-   grid-template-columns: 1fr 1fr;
-   grid-template-rows: 55px 1fr;
-   align-items: stretch;
-   gap: 20px;
+   max-height: 400px;
 }
 
 .container {
@@ -58,7 +51,7 @@ label {
    color: white;
    border-radius: 10px;
    box-sizing: border-box;
-   padding: 8px 16px;
+   padding: 10px 16px;
    z-index: 2;
 }
 

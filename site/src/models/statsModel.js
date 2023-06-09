@@ -23,10 +23,9 @@ function cadastrar(pontos, assists, rebotesDef, rebotesOff, arrmsCertos, arrmsEr
 }
 function listarPIE(idUsuario) {
    var instrucao = `
-      SELECT dataStat, pie FROM stats 
+      SELECT DATE_FORMAT(dataStat, "%d/%m/%y") as dataStat, pie FROM stats 
       JOIN usuario ON fkJogador = usuario.id
       WHERE usuario.id = ${idUsuario}
-      GROUP BY dataStat
       LIMIT 10;
    `;
 
