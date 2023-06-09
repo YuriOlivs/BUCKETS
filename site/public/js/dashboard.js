@@ -35,7 +35,7 @@ function listarPIE(idUsuario) {
                options: {
                   layout: {
                      padding: {
-                        bottom: 100,
+                        bottom: 15,
                         top: 15
                      },
                   },
@@ -162,7 +162,7 @@ function listarPontos(idUsuario) {
                   options: {
                      layout: {
                         padding: {
-                           bottom: 100,
+                           bottom: 15,
                            top: 15
                         },
                      },
@@ -197,7 +197,7 @@ function renderCharts() {
       options: {
          layout: {
             padding: {
-               bottom: 100,
+               bottom: 15,
                top: 15
             },
          },

@@ -4,6 +4,11 @@ label {
    text-align: left;
 }
 
+canvas {
+   width: 100%;
+   max-height: 350px !important;
+}
+
 .content {
    width: 100vw;
    height: 100vh;
