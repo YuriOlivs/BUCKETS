@@ -35,8 +35,12 @@ router.get("/listarPontos/:idUsuario", function (req, res) {
    statsController.listarPontos(req, res);
 });
 
-router.get("/listarDatasStats/:idUsuario", function (req, res) {
-   statsController.listarDatasStats(req, res);
+router.get("/listarAvgPiePts/:idUsuario", function (req, res) {
+   statsController.listarAvgPiePts(req, res);
+});
+
+router.get("/listarMediaDeReb/:idUsuario", function (req, res) {
+   statsController.listarMediaDeReb(req, res);
 });
 
 module.exports = router;

@@ -103,19 +103,6 @@ function listarPIE(req, res) {
    })
 }
 
-function listarDatasStats(req, res) {
-   var idUsuario = req.params.idUsuario;
-   
-   statsModel.listarDatasStats(idUsuario)
-   .then(function (resposta) {
-      res.json(resposta);
-   })
-   .catch(function (erro) {
-      console.log(erro);
-      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
-   })
-}
-
 function listarAcimaDaMedia(req, res) {
    var idUsuario = req.params.idUsuario;
    
@@ -168,6 +155,32 @@ function listarPontos(req, res) {
    })
 }
 
+function listarAvgPiePts(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarAvgPiePts(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
+function listarMediaDeReb(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarMediaDeReb(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
 module.exports = {
    testar,
    listar,
@@ -176,6 +189,7 @@ module.exports = {
    listarAbaixoDaMedia,
    listarAcimaDaMedia,
    listarNaMedia,
-   listarDatasStats,
-   listarPontos
+   listarPontos,
+   listarAvgPiePts,
+   listarMediaDeReb
 }

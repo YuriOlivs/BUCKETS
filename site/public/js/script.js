@@ -143,3 +143,35 @@ function entrar() {
 
     return false;
 }
+
+function changeNavDash() {
+    var url = window.location.href;
+    var icone;
+
+    if(url.endsWith("calculadora.html")) {
+        icone = document.getElementById("calculatorIcon");
+        icone.style.color = `white`;
+    } else {
+        icone = document.getElementById("chartIcon");
+        icone.style.color = `white`;
+    }
+}
+
+function greetings() {
+    var dataAtual = new Date();
+    var horaAtual = dataAtual.getHours();
+
+    const saudacaoSpan = document.getElementById("sp_saudacao");
+    var saudacao;
+    var nome = sessionStorage.NOME_USUARIO;
+
+    if (horaAtual >= 0 && horaAtual < 12) {
+    saudacao = "Bom dia";
+    } else if (horaAtual >= 12 && horaAtual < 18) {
+    saudacao = "Boa tarde";
+    } else {
+    saudacao = "Boa noite";
+    }
+
+    saudacaoSpan.innerText = `${saudacao}, ${nome}!`;
+}

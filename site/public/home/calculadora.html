@@ -6,6 +6,7 @@
    <title>BUCKETS | Calculadora de PIE</title>
 
    <link rel="stylesheet" href="../css/style.css">
+   <link rel="stylesheet" href="css/home_style.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
    <link rel="icon" href="../assets/icons/basketball.png" type="image/x-icon">
 
@@ -21,11 +22,21 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
    <script src="https://unpkg.com/@phosphor-icons/web"></script>
 </head>
-<body style="display: flex; overflow: hidden;">
+<body style="display: flex; overflow: hidden;" onload="changeNavDash()">
    <div class="site-background">
       <img src="../assets/noise.png" alt="" class="noise">
       <img src="../assets/calc-background.png" alt="" class="background">
    </div>
+
+   <div class="navbar-dash">
+      <ul>
+         <li><a href="dashboard.html"><i class="ph ph-chart-bar" id="chartIcon" title="dashboard"></i></a></li>
+         <li><a href="calculadora.html"><i class="ph ph-calculator" id="calculatorIcon" title="calculadora"></i></a></li>
+         <li><i class="ph ph-gear" title="configurações" id="configIcon"></i></li>
+      </ul>
+      <span id="sp_saudacao"></span>
+   </div>
+
    <div id="modal_erro">
       <div class="modal-bar"></div>
       <div>
@@ -46,7 +57,7 @@
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_search_jogador">Digite um jogador</label>
-                  <input type="text" id="ipt_search_jogador" style="z-index: 2;" maxlength="59" placeholder="Seu nome">
+                  <input type="text" id="ipt_search_jogador" style="z-index: 2;" maxlength="59" placeholder="Ex: Lebron James">
                   <div id="sp_search_jogador"></div>
                </div>
                <div class="input-box">
@@ -60,7 +71,7 @@
          </div>
          
          <div class="user-form">
-            <span>Insira suas estatísticas e compare seu desempenho com o desempenho do jogador escolhido!</span>
+            <span id="msg_form_user" class="animate__animated animate__repeat-2">Insira suas estatísticas de uma partida e compare seu desempenho com o do jogador escolhido!</span>
             <div class="input-box" id="iptbox_nome_jogador">
                <label for="ipt_nome_jogador">Nome do jogador</label>
                <input type="text" id="ipt_nome_jogador" placeholder="Stephen Curry">
@@ -68,11 +79,11 @@
                <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_pontos">Pontos:</label>
-                  <input type="text" id="ipt_pontos" placeholder="25">
+                  <input type="text" id="ipt_pontos" placeholder="Ex: 25">
                </div>
                <div class="input-box">
                   <label for="ipt_assists"> Assistências:</label>
-                  <input type="text" id="ipt_assists" placeholder="9">
+                  <input type="text" id="ipt_assists" placeholder="Ex: 9">
                </div>
                </div>
             
@@ -82,51 +93,51 @@
                      Rebotes (Defensivos):
                      <i class="ph ph-info tooltip tooltip-input" id="ipt_dreb_tooltip"></i>
                   </label>
-                  <input type="text" id="ipt_rebotes_def" placeholder="4">
+                  <input type="text" id="ipt_rebotes_def" placeholder="Ex: 4">
                </div>
                <div class="input-box">
                   <label for="ipt_rebotes">
                      Rebotes (Ofensivos):
                      <i class="ph ph-info tooltip tooltip-input" id="ipt_oreb_tooltip"></i>
                   </label>
-                  <input type="text" id="ipt_rebotes_off" placeholder="4">
+                  <input type="text" id="ipt_rebotes_off" placeholder="Ex: 4">
                </div>
             </div>
             
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_ll_tentados">Lances livres tentados</label>
-                  <input type="text" id="ipt_ll_tentados" placeholder="10">
+                  <input type="text" id="ipt_ll_tentados" placeholder="Ex: 10">
                </div>
                <div class="input-box">
                   <label for="ipt_ll_certos">Lances livros certos</label>
-                  <input type="text" id="ipt_ll_certos" placeholder="8">
+                  <input type="text" id="ipt_ll_certos" placeholder="Ex: 8">
                </div>
             </div>
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_arrms_tentados">Arremessos tentados</label>
-                  <input type="text" id="ipt_arrms_tentados" placeholder="8">
+                  <input type="text" id="ipt_arrms_tentados" placeholder="Ex: 8">
                </div>
                <div class="input-box">
                   <label for="ipt_arrms_certos">Arremessos certos</label>
-                  <input type="text" id="ipt_arrms_certos" placeholder="7">
+                  <input type="text" id="ipt_arrms_certos" placeholder="Ex: 7">
                </div>
             </div>
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_foul_cometidas">Faltas cometidas:</label>
-                  <input type="text" id="ipt_foul_cometidas" placeholder="3">
+                  <input type="text" id="ipt_foul_cometidas" placeholder="Ex: 3">
                </div>
                <div class="input-box">
                   <label for="ipt_foul_sofridas">Faltas sofridas:</label>
-                  <input type="text" id="ipt_foul_sofridas" placeholder="5">
+                  <input type="text" id="ipt_foul_sofridas" placeholder="Ex: 5">
                </div>
             </div>
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_minutos">Minutos jogados</label>
-                     <input type="text" id="ipt_minutos" placeholder="34" onkeydown="return ( event.ctrlKey || event.altKey
+                     <input type="text" id="ipt_minutos" placeholder="Ex: 34:40" onkeydown="return ( event.ctrlKey || event.altKey
                      || (47<event.keyCode && event.keyCode<58 && event.shiftKey==false)
                      || (95<event.keyCode && event.keyCode<106)
                      || (event.keyCode==8) || (event.keyCode==9)
@@ -135,13 +146,13 @@
                </div>
                <div class="input-box">
                   <label for="ipt_roubos_bola">Roubos de bola:</label>
-                  <input type="text" id="ipt_roubos_bola" placeholder="3">
+                  <input type="text" id="ipt_roubos_bola" placeholder="Ex: 3">
                </div>
             </div>
             <div class="flex-row">
                <div class="input-box">
                   <label for="ipt_tocos">Tocos:</label>
-                  <input type="text" id="ipt_tocos" placeholder="2">
+                  <input type="text" id="ipt_tocos" placeholder="Ex: 2">
                </div>
             
                <div class="input-box">
@@ -149,10 +160,10 @@
                      Turnovers:
                      <i class="ph ph-info tooltip tooltip-input" id="ipt_to_tooltip"></i>
                   </label>
-                  <input type="text" id="ipt_turnovers" placeholder="3">
+                  <input type="text" id="ipt_turnovers" placeholder="Ex: 3">
                </div>
             </div>
-            <button onclick="getJogadorStats()" id="btn_calc" class="btn">Calcular</button>
+            <button onclick="getJogadorStats()" id="btn_calc" class="btn">Comparar</button>
          </div>
    </div>
    </div>
@@ -161,7 +172,7 @@
       <div class="user-data">
         <h2>Suas estatísticas</h2>
         <div class="data-player">
-         <span id="user_nome">nome usuario</span>
+         <label for="ipt_nome_jogador" id="user_nome">Insira suas estatísticas!</label>
          <div class="flex-row">
             <div class="stats" id="pts_tooltip">
                <span>PTS</span>
@@ -242,7 +253,7 @@
       <div class="player-data">
          <h2>Estatísticas do jogador</h2>
          <div class="data-player">
-            <span id="player_name">nome jogador</span>
+            <label for="ipt_search_jogador" id="player_name">Escolha um jogador!</label>
             <div class="flex-row">
                <div class="stats">
                   <span>PTS</span>

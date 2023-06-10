@@ -46,11 +46,12 @@ function getJogadorStats() {
       tocos: Number(ipt_tocos.value),
       turnovers: Number(ipt_turnovers.value)
    }
-   showUserStats();
-   console.log(jogador);
+
    ipt_nome_jogador.disabled = true;
    iptbox_nome_jogador.style.backgroundColor = '#292929'
-   // limparInputs();
+   limparInputs();
+   msg_form_user.innerText = `Agora insira as estatísticas totais que seu time do seu time na partida!`;
+   msg_form_user.classList.add(`animate__pulse`);
    btn_calc.setAttribute("onclick", "getTeamStats()");
 }
 
@@ -72,10 +73,10 @@ function getTeamStats() {
       turnovers: Number(ipt_turnovers.value)
    }
 
-   console.log(time);
    limparInputs();
    btn_calc.setAttribute("onclick", "calcPIE()");
    cadStats();
+   showUserStats();
 }
 
 function calcPIE() {
@@ -192,6 +193,7 @@ function enterKeyPressed(e) {
 }
 
 function showUserStats() {
+   user_nome.style.color = 'white';
    user_nome.innerText = jogador.nome;
    user_pts.innerText = jogador.pontos;
    user_ast.innerText = jogador.assists;
@@ -380,5 +382,10 @@ close_modal.addEventListener('click', closeModal)
 btn_search.addEventListener('click', function () {
    getPlayerStats(idJogador, nomeJogador, anoStats);
 });
+
+window.onload = () => {
+   changeNavDash();
+   greetings();
+}
 
 renderOptions();

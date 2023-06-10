@@ -76,18 +76,6 @@ function listarAbaixoDaMedia(idUsuario) {
    return database.executar(instrucao);
 }
 
-
-function listarDatasStats(idUsuario) {
-   var instrucao = `
-   SELECT DATE_FORMAT(dataStat, '%d/%m/%y') as datas, idStats as dataStat FROM stats
-   JOIN usuario ON fkJogador = usuario.id
-   WHERE usuario.id = ${idUsuario};
-   `;
-
-   console.log("Executando a instrução SQL: \n"+ instrucao);
-   return database.executar(instrucao);
-}
-
 function listarPontos(idUsuario) {
    var instrucao = `
    SELECT pontos, DATE_FORMAT(dataStat, "%d/%m/%y") as dataStat FROM stats 
@@ -100,13 +88,40 @@ function listarPontos(idUsuario) {
    return database.executar(instrucao);
 }  
 
+function listarAvgPiePts(idUsuario) {
+   var instrucao = `
+   SELECT AVG(pontos) as media_pts, AVG(pie) as media_pie, AVG(assists) as media_ast FROM stats
+   JOIN usuario ON fkJogador = usuario.id
+   WHERE usuario.id = ${idUsuario};
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
+function listarMediaDeReb(idUsuario) {
+   var instrucao = `
+   SELECT AVG(soma_campos) AS media_reb
+   FROM (
+      SELECT rebotesOff + rebotesDef AS soma_campos
+      FROM stats
+      JOIN usuario ON fkJogador = usuario.id
+      WHERE usuario.id = ${idUsuario}
+   ) subconsulta;
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
 module.exports = {
    listar,
    cadastrar,
    listarPIE,
-   listarDatasStats,
    listarAbaixoDaMedia,
    listarAcimaDaMedia,
    listarNaMedia,
-   listarPontos
+   listarPontos,
+   listarAvgPiePts,
+   listarMediaDeReb
 }

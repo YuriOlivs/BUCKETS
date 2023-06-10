@@ -1,12 +1,19 @@
 @import '../../css/style.css';
 
+body {
+   overflow: hidden;
+}
+
 label {
    text-align: left;
 }
 
-canvas {
-   width: 100%;
+.dash-chart {
    max-height: 350px !important;
+}
+
+a {
+   text-decoration: none;
 }
 
 .content {
@@ -63,4 +70,115 @@ canvas {
 .container-chart {
    grid-column-start: 1;
    grid-column-end: 3;
+}
+
+.navbar-dash {
+   position: absolute;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   gap: 16px;
+   top: calc(var(--main-padding) * 0.2);
+   left: calc(var(--main-padding) * 0.55);
+}
+
+.navbar-dash span {
+   color: white;
+   font-size: 1.7rem;
+   font-family: var(--title-font);
+   font-weight: 800;
+   text-transform: uppercase;
+}
+
+.navbar-dash ul {
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   list-style: none;
+   gap: 12px;
+   margin: 0;
+   padding: 0;
+   width: fit-content;
+   padding: 8px 10px;
+   background-color: #212121;
+   border: 1px solid #6161612e;
+   border-radius: 10px;
+   z-index: 2;
+   box-sizing: border-box;
+}
+
+.navbar-dash i {
+   color: var(--gray-500);
+   font-size: 1.6rem;
+   cursor: pointer;
+   transition: all .2s ease-in;
+}
+
+.navbar-dash i:hover {
+   color: rgb(143, 143, 143);
+}
+
+.container.container-indicators {
+   background-color: transparent;
+   border: none;
+   padding: 0;
+}
+
+.indicators {
+   display: grid;
+   grid-template-columns: 1fr 4fr;
+   grid-template-rows: 1fr 1fr 1fr 1fr;
+   gap: 20px;
+   width: 100%;
+   height: 100%;
+}
+
+.indicators-item {
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   background: var(--gray-800);  
+   border-radius: 10px;
+   border: 1px solid #6161612e;
+   box-sizing: border-box;
+   color: white;
+   padding: 10px 16px;
+}
+
+.indicators-item-large {
+   grid-column-start: 2;
+   grid-column-end: 3;
+   grid-row-start: 2;
+   grid-row-end: 5;
+}
+
+.indicators-item-row {
+   grid-column-start: 2;
+   grid-column-end: 3;
+   grid-row-start: 1;
+   grid-row-end: 2;
+}
+
+.media-title {
+   color: white;
+   text-align: left;
+}
+
+.media-item {
+   font-size: 2.2rem;
+   font-family: var(--title-font);
+   font-weight: 800;
+   color: #4D89FF12;
+   -webkit-text-stroke: 1px #4D89FF;
+}
+
+#media_analise {
+   display: flex;
+   align-items: center;
+   gap: 4px;
+   margin-top: 2%;
+}
+
+#info_media {
+   display: none;
 }

@@ -17,8 +17,6 @@ function listarPIE(idUsuario) {
 
             data = data.map(x => x * 100);
 
-            console.log(data);
-
             var ctx = document.getElementById("pie_historico");
             new Chart(ctx, {
                type: 'line',
@@ -38,6 +36,7 @@ function listarPIE(idUsuario) {
                         bottom: 15,
                         top: 15
                      },
+                     responsive: true,
                   },
                }
             });
@@ -48,7 +47,7 @@ function listarPIE(idUsuario) {
    })
 }
 
-function listarMedias(idUsuario) {
+function listarMediasMes(idUsuario) {
    var data = [];
    var labels = [];
 
@@ -102,34 +101,7 @@ function listarMedias(idUsuario) {
       labels
    }
 
-   console.log("Medias")
-   console.log(labels);
-   console.log(data);
-   console.log("Medias fim")
-
    return medias
-}
-
-function listarDatas(idUsuario) {
-   const select = document.getElementById("slct_stats");
-   fetch(`/stats/listarDatasStats/${idUsuario}`).then(function (resposta) {
-      if(resposta.ok) {
-            if(resposta.status == 204) {
-               console.error("ta vazio");
-            } else {
-               resposta.json().then(function (resposta) {
-                  resposta.forEach(data => {
-                     let option = document.createElement("option");
-                     option.setAttribute("value", data.idStats);
-                     option.textContent = data.datas;
-                     select.appendChild(option);
-                  });
-               })
-            }
-      }
-   }).catch(function (resposta) {
-
-   })
 }
 
 function listarPontos(idUsuario) {
@@ -166,7 +138,8 @@ function listarPontos(idUsuario) {
                            top: 15
                         },
                      },
-                  }
+                     responsive: true,
+                  },
                });
             })
          }
@@ -174,21 +147,94 @@ function listarPontos(idUsuario) {
    });
 }
 
+async function listarMediasGerais(idUsuario) {
+   var spanPIE = document.getElementById("media_pie");
+   var spanPTS = document.getElementById("media_pts");
+   var spanAST = document.getElementById("media_ast");
+   var spanREB = document.getElementById("media_reb");
+
+   try {
+      await renderIndicators(spanPIE, spanPTS, spanAST, spanREB, idUsuario);
+      verifMedias();
+   } catch (error) {
+      console.error("Houve um erro:", error);
+      // Você pode tomar outras ações aqui, se necessário
+   }
+}
+
+function renderIndicators(spanPIE, spanPTS, spanAST, spanREB, idUsuario) {
+   return new Promise(function (resolve, reject) {
+      const fetchPromises = [];
+
+      const avgs = fetch(`/stats/listarAvgPiePts/${idUsuario}`)
+         .then(function (resposta) {
+            if (resposta.ok) {
+               if (resposta.status == 204) {
+                  console.log("ta vazio");
+               } else {
+                  return resposta.json();
+               }
+            }
+         })
+         .then(function (resposta) {
+            spanPIE.innerText = (resposta[0].media_pie * 100).toFixed(1);
+            spanAST.innerText = resposta[0].media_ast.toFixed(1);
+            spanPTS.innerText = resposta[0].media_pts.toFixed(1);
+         })
+         .catch(function (erro) {
+            console.error("Houve um erro na API");
+            reject(erro);
+         });
+
+      fetchPromises.push(avgs);
+
+      const avgReb = fetch(`/stats/listarMediaDeReb/${idUsuario}`)
+         .then(function (resposta) {
+            if (resposta.ok) {
+               if (resposta.status == 204) {
+                  console.log("ta vazio");
+               } else {
+                  return resposta.json();
+               }
+            }
+         })
+         .then(function (resposta) {
+            spanREB.innerText = resposta[0].media_reb.toFixed(1);
+         })
+         .catch(function (erro) {
+            console.error("Houve um erro na API");
+            reject(erro);
+         });
+
+      fetchPromises.push(avgReb);
+
+      Promise.all(fetchPromises)
+         .then(function () {
+            resolve();
+         })
+         .catch(function (error) {
+            console.error("Houve um erro em uma das chamadas fetch");
+            reject(error);
+         });
+   });
+}
+
+
 function renderCharts() {
    var idUsuario = sessionStorage.ID_USUARIO;
 
    listarPontos(idUsuario);
    listarPIE(idUsuario);
-   var medias = listarMedias(idUsuario);
+   listarMediasGerais(idUsuario);
 
    var ctx = document.getElementById("medias_historico");
-   new Chart(ctx, {
+   var mediasChart = new Chart(ctx, {
       type: 'bar',
       data: {
-         labels: medias.labels,
+         labels: [],
          datasets: [{
             label: 'Índice PIE',
-            data: medias.data,
+            data: [],
             backgroundColor: '#4D89FF12',
             borderColor: '#4D89FF',
             borderWidth: 1
@@ -201,23 +247,103 @@ function renderCharts() {
                top: 15
             },
          },
-      }
+         responsive: true,
+      },
    });
+
+   var mediasMes = listarMediasMes(idUsuario);
+
+   mediasChart.data.labels = mediasMes.labels;
+   mediasChart.data.datasets[0].data  = mediasMes.data;
+   mediasChart.update();
    // listarDatas(idUsuario);
 }
 
-// var ctxMedias = document.getElementById("medias_historico");
-// var mediasLineChart = new Chart(ctxMedias, {
-//    type: 'line',
-//    data: {
-//       labels: ['Arremessos errados', 'Lances livres errados', 'Turnovers', 'Arremessos certos', 'Lances livres certos', 'Bolas roubadas'],
-//       datasets: [{
-//          label: 'Estatísticas',
-//          data: [0, 0, 0, 0, 0, 0],
-//          backgroundColor: '#4D89FF12',
-//          borderColor: '#4D89FF',
-//          borderWidth: 1
-//       }],
-//    },
-//    options: chartOption
-// });
+function verifMedias() {
+   var pie = parseInt(Number(document.getElementById("media_pie").innerText));
+   var pts = parseInt(Number(document.getElementById("media_pts").innerText));
+   var ast = parseInt(Number(document.getElementById("media_ast").innerText));
+   var reb = parseInt(Number(document.getElementById("media_reb").innerText));
+
+   var strings = [pts.toString(), ast.toString(), reb.toString()]
+
+   var analise = document.getElementById("media_analise");
+   var qtdDouble = 0;
+
+   for (let i = 0; i < strings.length; i++) {
+      const element = strings[i];
+      if(element.length >= 2) {
+         qtdDouble++;
+      }
+   }
+
+   if(qtdDouble == 3) {
+      analise.innerHTML = `Parabéns, você está com uma média de <b id="td_tooltip">Triple Double!</b><i class="ph ph-info" id="td_tooltip"></i>`;
+      tippy("#td_tooltip", {
+         content: 'Um Triple Double ocorre quando um jogador obtem 2 dígitos em 3 das estatísticas principais.',
+         placement: 'bottom',
+      });
+   } else if(qtdDouble == 2) {
+      analise.innerHTML = `Parabéns, você está com uma média de <b id="dd_tooltip">Double Double!</b><i class="ph ph-info" id="dd_tooltip"></i>`;
+      tippy("#dd_tooltip", {
+         content: 'Um Double Double ocorre quando um jogador obtem 2 dígitos em 2 das estatísticas principais.',
+         placement: 'bottom',
+      });
+   } else if(pts >= 15 && ast >= 7 && reb >= 6 ) {
+      analise.innerHTML = `Parabéns, você está com uma média alta em todas as estatísticas!`;      
+   } else if(pts >= 15 && ast >= 7) {
+      analise.innerHTML = `Parabéns, você está com uma média alta em pontos e assistências`;
+   } else if(pts >= 15 && reb >= 6) {
+      analise.innerHTML = `Parabens, você está com uma média alta em pontos e rebotes!`;
+   } else if(ast >= 7 && reb >= 6) {
+      analise.innerHTML = `Parabéns, você está com uma média alta em assistências e rebotes!`;
+   } else if(pts >= 15) {
+      analise.innerHTML = `Parabéns, você está com uma média alta em pontos!`;
+   } else if(ast >= 6) {
+      analise.innerHTML = `Parabéns, você está com uma média alta em assistências!`;
+   } else if(reb >= 6) {
+      analise.innerHTML = `Parabéns, você está com uma média alta em rebotes!`;
+   } else {
+      analise.innerHTML = `Não há dados relevantes para destacar 😔`;
+   }
+
+   if(analise.innerHTML.startsWith("Parabéns") == true) {
+      if(pie > 20) {
+         analise.innerHTML += ` E possui uma média de PIE muito alta!`;
+      } else if(pie > 12) {
+         analise.innerHTML += ` E possui uma média de PIE alta!`;
+      } else {
+         return
+      }
+   } else {
+      if(pie > 20) {
+         analise.innerHTML = `Parabéns, você possui uma média de PIE  <b>muito alta</b>!`;
+      } else if(pie > 12) {
+         analise.innerHTML = `Parabéns, você possui uma média de PIE alta!`;
+      } else {
+         return
+      }
+   }
+}
+
+function ajustSize(elemento, tamanho) {
+   var elemento = ".container";
+   var tamanho = "46vw";
+
+   ajust = document.querySelectorAll(elemento);
+
+   ajust.forEach(div => {
+      div.style.width = tamanho;
+   });
+
+   setTimeout(() => {
+      ajustSize(elemento, tamanho);
+   }, 500);
+}
+
+window.onload = () => {
+   renderCharts(),
+   greetings(),
+   ajustSize(),
+   changeNavDash()
+}

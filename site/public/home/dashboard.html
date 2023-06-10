@@ -19,36 +19,73 @@
 
    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
+   <script src="https://unpkg.com/@phosphor-icons/web"></script>
+
+   <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+   <script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 </head>
-<body style="overflow: hidden;" onload="renderCharts()">
+<body style="overflow: hidden;">
    <div class="site-background">
       <img src="../assets/noise.png" alt="" class="noise">
       <img src="../assets/calc-background.png" alt="" class="background">
+   </div>
+
+   <div class="navbar-dash">
+      <ul>
+         <li><a href="dashboard.html"><i class="ph ph-chart-bar" id="chartIcon" title="dashboard"></i></a></li>
+         <li><a href="calculadora.html"><i class="ph ph-calculator" id="calculatorIcon" title="calculadora"></i></a></li>
+         <li><i class="ph ph-gear" title="configurações" id="configIcon"></i></li>
+      </ul>
+      <span id="sp_saudacao"></span>
    </div>
 
    <div class="content">
       <div id="grid_hist">
             <div class="grid-item">
                <div class="container container-chart">
-                  <h5>Índices PIE registrados nas últimas partidas</h5>
-                  <canvas id="pie_historico"></canvas>
+                  <h5>Índices PIE (%) registrados nas últimas partidas</h5>
+                  <canvas id="pie_historico" class="dash-chart"></canvas>
                </div>
             </div>
             <div class="grid-item grid-item2">
                <div class="container">
-                  
+                  <h5>Histórico de pontos registrados nas últimas partidas</h5>
+                  <canvas id="pontos_historico" class="dash-chart"></canvas>
                </div>
             </div>
             <div class="grid-item grid-item3">
                <div class="container">
-                  <h5>Quantidade de índices PIE acima, abaixo ou na média (12)</h5>
-                  <canvas id="medias_historico"></canvas>
+                  <h5>Quantidade de índices PIE acima, abaixo ou na média da NBA (12)</h5>
+                  <canvas id="medias_historico" class="dash-chart"></canvas>
                </div>
             </div>
             <div class="grid-item grid-item4">
-               <div class="container">
-                  <h5>Histórico de pontos registrados nas últimas partidas</h5>
-                  <canvas id="pontos_historico"></canvas>
+               <div class="container container-indicators">
+                  <div class="indicators">
+                     <div class="indicators-item indicators-item-large">
+
+                     </div>
+                     <div class="indicators-item indicators-item-row">
+                        <span class="media-title">Análise</span>
+                        <span id="media_analise">Não há dados relevantes para mostrar 😔 <i class="ph ph-info" id="info_media"></i></span>
+                     </div>
+                     <div class="indicators-item">
+                        <span class="media-title">Média de PIE</span>
+                        <span id="media_pie" class="media-item">0</span>                        
+                     </div>
+                     <div class="indicators-item">
+                        <span class="media-title">Média de PTS</span>
+                        <span id="media_pts" class="media-item">0</span>
+                     </div>
+                     <div class="indicators-item">
+                        <span class="media-title">Média de AST</span>
+                        <span id="media_ast" class="media-item">0</span>
+                     </div>
+                     <div class="indicators-item">
+                        <span class="media-title">Média de REB</span>
+                        <span id="media_reb" class="media-item">0</span>
+                     </div>
+                  </div>
                </div>
             </div>
       </div>

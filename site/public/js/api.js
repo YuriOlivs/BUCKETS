@@ -62,7 +62,7 @@ function getPlayerStats(id_jogador, nome_jogador, ano) {
             pf: jogadorStatsJSON.data[0].pf,
             fs: jogadorStatsJSON.data[0].fta
          }
-   
+
          player_name.innerText = nome_jogador;
          player_pts.innerText = jogadorStats.pts;
          player_ast.innerText = jogadorStats.ast;
@@ -79,7 +79,6 @@ function getPlayerStats(id_jogador, nome_jogador, ano) {
          player_to.innerText = jogadorStats.to;
          player_min.innerText = jogadorStats.min;
          
-
          playerChart.data.datasets[0].data[0] = jogadorStats.fga - jogadorStats.fgm;
          playerChart.data.datasets[0].data[1] = jogadorStats.fta - jogadorStats.ftm;
          playerChart.data.datasets[0].data[2] = jogadorStats.to;
