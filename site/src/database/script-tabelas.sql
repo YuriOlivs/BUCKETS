@@ -10,32 +10,14 @@ CREATE TABLE usuario (
 
 ALTER TABLE usuario ADD CONSTRAINT verifEmail UNIQUE(email);
 
-CREATE TABLE franquia( 
-	idFranquia INT PRIMARY KEY AUTO_INCREMENT, 
-    cidade VARCHAR(50), 
-    nome VARCHAR(50), 
-    sigla CHAR(3),
-    conferencia VARCHAR(50) 
-); 
-
-CREATE TABLE jogador( 
-	idJogador INT PRIMARY KEY AUTO_INCREMENT, 
-    nome VARCHAR(100), 
-    posicao VARCHAR(2)
-    /*
-    fkFranquia INT, 
-    FOREIGN KEY (fkFranquia) REFERENCES franquia(idFranquia) 
-    */
-); 
-
 CREATE TABLE stats( 
 	idStats INT AUTO_INCREMENT, 
     pontos FLOAT, 
     assists FLOAT, 
     rebotesDef FLOAT, 
     rebotesOff FLOAT, 
+	arrmsCertos FLOAT, 
     arrmsErrados FLOAT, 
-    arrmsCertos FLOAT, 
     lancesLivresCertos FLOAT, 
     lancesLivresErrados FLOAT, 
 	minutosJogados TIME, 
@@ -47,48 +29,67 @@ CREATE TABLE stats(
     pie FLOAT,
     dataStat DATE, 
     fkJogador INT,	 
-    CONSTRAINT fkJogadorStats FOREIGN KEY (fkJogador) REFERENCES jogador(idJogador),
+    CONSTRAINT fkJogadorStats FOREIGN KEY (fkJogador) REFERENCES usuario(id),
     PRIMARY KEY (idStats, fkJogador)
 ); 
-/*
-INSERT INTO franquia 
-VALUES 
-(null, 'Philadelphia', '76ers', 'Leste'), 
-(null, 'Boston', 'Celtics', 'Leste'), 
-(null, 'Chicago', 'Bulls', 'Leste'), 
-(null, 'Miami', 'Heat', 'Leste'), 
-(null, 'Milwaukee', 'Bucks', 'Leste'), 
-(null, 'Houston', 'Rockets', 'Oeste'), 
-(null, 'Dallas', 'Mavericks', 'Oeste'), 
-(null, 'Sacramento', 'Kings', 'Oeste'), 
-(null, 'Golden State', 'Warriors', 'Oeste'), 
-(null, 'Charlotte', 'Hornets', 'Leste'), 
-(null, 'Detroit', 'Pistons', 'Leste'), 
-(null, 'Brooklyn', 'Nets', 'Leste'), 
-(null, 'New York', 'Knicks', 'Leste'), 
-(null, 'Denver', 'Nuggets', 'Oeste'), 
-(null, 'Phoenix', 'Suns', 'Oeste'), 
-(null, 'Utah', 'Jazz', 'Oeste'), 
-(null, 'Cleveland', 'Cavaliers', 'Leste'), 
-(null, 'Atlanta', 'Hawks', 'Leste'), 
-(null, 'Washington', 'Wizards', 'Oeste'), 
-(null, 'Oklahoma City', 'Thunder', 'Oeste'), 
-(null, 'Memphis', 'Grizzlies', 'Oeste'), 
-(null, 'San Antonio', 'Spurs', 'Oeste'), 
-(null, 'Minnesota', 'Timberwolves', 'Oeste'), 
-(null, 'Toronto', 'Raptors', 'Leste'), 
-(null, 'Indiana', 'Pacers', 'Leste'), 
-(null, 'Orlando', 'Magic', 'Leste'), 
-(null, 'New Orleans', 'Pelicans', 'Oeste'), 
-(null, 'Portland', 'Trail Blazers', 'Oeste'), 
-(null, 'Los Angeles', 'Lakers', 'Oeste'), 
-(null, 'Los Angeles', 'Clippers', 'Oeste'); 
-*/
-SELECT * FROM usuario;
-SELECT * FROM jogador;
-SELECT * FROM franquia;
+
+INSERT INTO usuario VALUES
+(null, 'Yuri', 'yuri', '123');
+
+INSERT INTO stats VALUES
+(NULL, 15, 6, 3, 2, 8, 3, 6, 1, '00:35:20', 2, 3, 1, 0, 2, 0.25, '2023-06-01', 100),
+(NULL, 20, 4, 2, 1, 7, 2, 4, 1, '00:40:15', 1, 2, 1, 1, 2, 0.11, '2023-06-02', 100),
+(NULL, 18, 8, 4, 2, 6, 3, 5, 1, '00:38:45', 3, 4, 1, 1, 3, 0.12, '2023-06-03', 100),
+(NULL, 23, 5, 3, 1, 9, 2, 6, 1, '00:42:10', 2, 3, 2, 0, 2, 0.16, '2023-06-04', 100),
+(NULL, 16, 7, 3, 2, 7, 2, 4, 1, '00:36:55', 2, 3, 1, 1, 2, 0.13, '2023-06-05', 100),
+(NULL, 14, 5, 2, 1, 7, 2, 5, 1, '00:34:45', 2, 3, 1, 0, 2, 0.08, '2023-06-06', 100),
+(NULL, 17, 6, 3, 2, 8, 3, 6, 1, '00:37:25', 2, 3, 1, 1, 2, 0.26, '2023-06-07', 100),
+(NULL, 19, 4, 2, 1, 7, 2, 4, 1, '00:39:15', 1, 2, 1, 0, 2, 0.24, '2023-06-08', 100),
+(NULL, 21, 7, 4, 2, 9, 3, 5, 1, '00:41:35', 2, 3, 2, 1, 2, 0.22, '2023-06-09', 100),
+(NULL, 16, 5, 3, 1, 6, 2, 4, 1, '00:36:55', 2, 3, 1, 0, 2, 0.17, '2023-06-10', 100);
+
 SELECT * FROM stats;
 
-SELECT * FROM jogador JOIN franquia 
-	ON fkFranquia = idFranquia 
-		WHERE conferencia = 'Oeste'; 
+SELECT DATE_FORMAT(dataStat, '%d/%m/%y'), pie as dataStat FROM stats
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100;
+
+SELECT pontos, DATE_FORMAT(dataStat, "%d/%m/%y") as dataStat FROM stats 
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100;
+
+SELECT * FROM usuario;
+
+SELECT DATE_FORMAT(dataStat, "%d/%m/%y"), pie FROM stats 
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100
+LIMIT 10;
+  
+SELECT COUNT(pie) as qtd_acima FROM stats
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100 AND pie > 0.13;
+
+SELECT AVG(pie) as media_pie FROM stats
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100;
+
+SELECT AVG(pontos) as media_pts, AVG(pie) as media_pie, AVG(assists) as media_ast FROM stats
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100;
+
+SELECT AVG(soma_campos) AS media_soma
+FROM (
+    SELECT rebotesOff + rebotesDef AS soma_campos
+    FROM stats
+    JOIN usuario ON fkJogador = usuario.id
+    WHERE usuario.id = 100
+) subconsulta;
+
+SELECT AVG(assists) as media_pie FROM stats
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100;
+
+SELECT pontos, pie FROM stats
+JOIN usuario ON fkJogador = usuario.id
+WHERE usuario.id = 100
+LIMIT 6;
