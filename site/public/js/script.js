@@ -364,7 +364,7 @@ function renderTopPlayers() {
         titleJogador.appendChild(timeJogador);
         
         var stats = document.createElement("div");
-        stats.className = "stats";
+        stats.className = "stats-mvp";
         
         var flexRow1 = document.createElement("div");
         flexRow1.className = "flex-row";

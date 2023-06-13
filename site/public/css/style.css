@@ -490,17 +490,14 @@ input {
   gap: 30px;
 }
 
-.jogador-left {
+.jogador-left, .jogador-right {
   display: flex;
   gap: 15vw;
   width: 100%;
 }
 
 .jogador-right {
-  display: flex;
   flex-direction: row-reverse;
-  gap: 15vw;
-  width: 100%;
 }
 
 .imgs-jogador {
@@ -562,14 +559,14 @@ input {
   font-size: 2rem;
 }
 
-.stats {
+.stats-mvp {
   display: flex;
   flex-direction: column;
   gap: 10px;
   color: white;
 }
 
-.stats span {
+.stats-mvp span {
   font-family: var(--title-font);
   font-weight: 700;
   font-size: 2rem;
@@ -579,7 +576,7 @@ input {
   font-size: 3rem;
 }
 
-.stats .flex-row {
+.stats-mvp .flex-row {
   gap: 50px;
 }
 
