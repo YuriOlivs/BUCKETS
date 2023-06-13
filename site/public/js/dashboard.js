@@ -48,61 +48,58 @@ function listarPIE(idUsuario) {
 }
 
 function listarMediasMes(idUsuario) {
-   var data = [];
-   var labels = [];
+   return new Promise(function(resolve, reject) {
+      var data = [];
+      var labels = [];
 
-   fetch(`/stats/listarAcimaDaMedia/${idUsuario}`).then(function (resposta) {
-      if(resposta.ok) {
-         if(resposta.status == 204) {
-            console.log("ta vazio");
+      function handleResponse(resposta) {
+         if (resposta.ok) {
+            if (resposta.status == 204) {
+               console.log("ta vazio");
+            } else {
+               return resposta.json();
+            }
          } else {
-            resposta.json().then(function (resposta) {
-               data.push(resposta[0].qtd_acima);
-               labels.push('Acima da média');
-            });
+            throw new Error("Houve um erro na API.");
          }
       }
-   }).catch(function (resposta) {
-      console.log("Houve um erro na API.");
+
+      fetch(`/stats/listarAcimaDaMedia/${idUsuario}`)
+         .then(handleResponse)
+         .then(function (resposta) {
+            data.push(resposta[0].qtd_acima);
+            labels.push('Acima da média');
+         })
+         .catch(function (error) {
+            console.log(error);
+            reject(error);
+         });
+
+      fetch(`/stats/listarAbaixoDaMedia/${idUsuario}`)
+         .then(handleResponse)
+         .then(function (resposta) {
+            data.push(resposta[0].qtd_abaixo);
+            labels.push('Abaixo da média');
+         })
+         .catch(function (error) {
+            console.log(error);
+            reject(error);
+         });
+
+      fetch(`/stats/listarNaMedia/${idUsuario}`)
+         .then(handleResponse)
+         .then(function (resposta) {
+            data.push(resposta[0].qtd_media);
+            labels.push('Na média');
+            resolve({ data, labels });
+         })
+         .catch(function (error) {
+            console.log(error);
+            reject(error);
+         });
    });
-
-   fetch(`/stats/listarAbaixoDaMedia/${idUsuario}`).then(function (resposta) {
-      if(resposta.ok) {
-         if(resposta.status == 204) {
-            console.log("ta vazio");
-         } else {
-            resposta.json().then(function (resposta) {
-               data.push(resposta[0].qtd_abaixo);
-               labels.push('Abaixo da média');
-            });
-         }
-      }
-   }).catch(function (resposta) {
-      console.log("Houve um erro na API");
-   });
-
-   fetch(`/stats/listarNaMedia/${idUsuario}`).then(function (resposta) {
-      if(resposta.ok) {
-         if(resposta.status == 204) {
-            console.log("ta vazio");
-         } else {
-            resposta.json().then(function (resposta) {
-               data.push(resposta[0].qtd_media);
-               labels.push('Na média');
-            });
-         }
-      }
-   }).catch(function (resposta) {
-      console.log("Houve um erro na API");
-   });
-
-   var medias = {
-      data,
-      labels
-   }
-
-   return medias
 }
+
 
 function listarPontos(idUsuario) {
    var data = [];
@@ -219,6 +216,66 @@ function renderIndicators(spanPIE, spanPTS, spanAST, spanREB, idUsuario) {
    });
 }
 
+function listarPtsPie(idUsuario) {
+   var pie = [];
+   var pontos = [];
+   fetch(`/stats/listarPontosPie/${idUsuario}`).then(function (resposta) {
+      if(resposta.ok) {
+         if(resposta.status == 204) {
+            console.log("ta vazio")
+         } else {
+            resposta.json().then(function (resposta) {
+               resposta.forEach(element => {
+                  pie.push(element.pie);
+                  pontos.push(element.pontos);
+               });
+
+               pie = pie.map(x => x * 100);
+
+               var ctx = document.getElementById('scatterChart').getContext('2d');
+               new Chart(ctx, {
+                 type: 'scatter',
+                 data: {
+                   datasets: [{
+                     label: 'Relação entre Índice PIE e Pontos',
+                     data: pie.map((value, index) => ({x: value, y: pontos[index]})),
+                     backgroundColor: '#4D89FF12', // Cor de preenchimento
+                     borderColor: '#4D89FF', // Cor da borda
+                     borderWidth: 1
+                   }]
+                 },
+                 options: {
+                   scales: {
+                     x: {
+                       title: {
+                         display: true,
+                         text: 'Índice PIE'
+                       }
+                     },
+                     y: {
+                       title: {
+                         display: true,
+                         text: 'Quantidade de Pontos'
+                       }
+                     }
+                   },
+                   layout: {
+                     padding: {
+                        bottom: 15,
+                        top: 15
+                     },
+                  },
+                  responsive: true,
+                 }
+               });
+            });
+         }
+      }
+   })
+   .catch(function (error) {
+      console.error("Houve um erro na API: "+error)
+   })
+}
 
 function renderCharts() {
    var idUsuario = sessionStorage.ID_USUARIO;
@@ -226,36 +283,43 @@ function renderCharts() {
    listarPontos(idUsuario);
    listarPIE(idUsuario);
    listarMediasGerais(idUsuario);
+   listarPtsPie(idUsuario);
 
-   var ctx = document.getElementById("medias_historico");
-   var mediasChart = new Chart(ctx, {
-      type: 'bar',
-      data: {
-         labels: [],
-         datasets: [{
-            label: 'Índice PIE',
-            data: [],
-            backgroundColor: '#4D89FF12',
-            borderColor: '#4D89FF',
-            borderWidth: 1
-         }]
-      },
-      options: {
-         layout: {
-            padding: {
-               bottom: 15,
-               top: 15
-            },
+   listarMediasMes(idUsuario)
+   .then(function (medias) {
+      var ctx = document.getElementById("medias_historico");
+      var mediasChart = new Chart(ctx, {
+         type: 'bar',
+         data: {
+            labels: medias.labels,
+            datasets: [{
+               label: 'Índice PIE',
+               data: medias.data,
+               backgroundColor: '#4D89FF12',
+               borderColor: '#4D89FF',
+               borderWidth: 1
+            }]
          },
-         responsive: true,
-      },
+         options: {
+            layout: {
+               padding: {
+                  bottom: 15,
+                  top: 15
+               },
+            },
+            responsive: true,
+         },
+      });
+   })
+   .catch(function (error) {
+      console.log(error); // Trate o erro, se necessário
    });
 
-   var mediasMes = listarMediasMes(idUsuario);
+   // var mediasMes = listarMediasMes(idUsuario);
 
-   mediasChart.data.labels = mediasMes.labels;
-   mediasChart.data.datasets[0].data  = mediasMes.data;
-   mediasChart.update();
+   // mediasChart.data.labels = mediasMes.labels;
+   // mediasChart.data.datasets[0].data  = mediasMes.data;
+   // mediasChart.update();
    // listarDatas(idUsuario);
 }
 
@@ -326,24 +390,50 @@ function verifMedias() {
    }
 }
 
-function ajustSize(elemento, tamanho) {
-   var elemento = ".container";
-   var tamanho = "46vw";
+function ajustSize(elemento, tamanho, width) {
 
-   ajust = document.querySelectorAll(elemento);
+   if(elemento.startsWith("#")) {
+      elemento = elemento.replaceAll("#", '');
+      let ajust = document.getElementById(elemento);
 
-   ajust.forEach(div => {
-      div.style.width = tamanho;
-   });
+      if(width == true) {
+         ajust.style.width = tamanho;
+         setTimeout(() => {
+            ajustSize(elemento, tamanho, true);
+         }, 500);
+      } else {
+         console.log(ajust);
+         ajust.style.height = tamanho;
+         setTimeout(() => {
+            ajustSize(elemento, tamanho, false);
+         }, 500);
+      }
+   } else {
+      let ajust = document.querySelectorAll(elemento);
 
-   setTimeout(() => {
-      ajustSize(elemento, tamanho);
-   }, 500);
+      if(width == true) {
+         ajust.forEach(div => {
+            div.style.width = tamanho;
+         });
+         setTimeout(() => {
+            ajustSize(elemento, tamanho, true);
+         }, 500);
+      } else {
+         ajust.forEach(div => {
+            div.style.height = tamanho;
+         });
+         setTimeout(() => {
+            ajustSize(elemento, tamanho, false);
+         }, 500);
+      }
+   }
 }
 
 window.onload = () => {
    renderCharts(),
    greetings(),
-   ajustSize(),
+   ajustSize(".container", "46vw", true),
+   ajustSize("#indicators_large", "31.5vh", false),
+   ajustSize("#indicators_large", "37vw", true),
    changeNavDash()
 }

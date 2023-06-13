@@ -43,4 +43,8 @@ router.get("/listarMediaDeReb/:idUsuario", function (req, res) {
    statsController.listarMediaDeReb(req, res);
 });
 
+router.get("/listarPontosPie/:idUsuario", function (req, res) {
+   statsController.listarPontosPie(req, res);
+});
+
 module.exports = router;

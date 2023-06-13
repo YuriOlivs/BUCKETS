@@ -181,6 +181,19 @@ function listarMediaDeReb(req, res) {
    })
 }
 
+function listarPontosPie(req, res) {
+   var idUsuario = req.params.idUsuario;
+   
+   statsModel.listarPontosPie(idUsuario)
+   .then(function (resposta) {
+      res.json(resposta);
+   })
+   .catch(function (erro) {
+      console.log(erro);
+      console.log("Houve um erro ao puxar dados vindos do banco de dados", erro.sqlMessage);
+   })
+}
+
 module.exports = {
    testar,
    listar,
@@ -191,5 +204,6 @@ module.exports = {
    listarNaMedia,
    listarPontos,
    listarAvgPiePts,
-   listarMediaDeReb
+   listarMediaDeReb,
+   listarPontosPie
 }

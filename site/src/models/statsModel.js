@@ -114,6 +114,18 @@ function listarMediaDeReb(idUsuario) {
    return database.executar(instrucao);
 }
 
+function listarPontosPie(idUsuario) {
+   var instrucao = `
+   SELECT pontos, pie FROM stats
+   JOIN usuario ON fkJogador = usuario.id
+   WHERE usuario.id = 100
+   LIMIT 6;
+   `;
+
+   console.log("Executando a instrução SQL: \n"+ instrucao);
+   return database.executar(instrucao);
+}
+
 module.exports = {
    listar,
    cadastrar,
@@ -123,5 +135,6 @@ module.exports = {
    listarNaMedia,
    listarPontos,
    listarAvgPiePts,
-   listarMediaDeReb
+   listarMediaDeReb,
+   listarPontosPie
 }
