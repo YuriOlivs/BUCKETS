@@ -64,19 +64,19 @@ function getPlayerStats(id_jogador, nome_jogador, ano) {
          }
 
          player_name.innerText = nome_jogador;
-         player_pts.innerText = jogadorStats.pts;
-         player_ast.innerText = jogadorStats.ast;
-         player_stl.innerText = jogadorStats.stl;
-         player_oreb.innerText = jogadorStats.oreb;
-         player_dreb.innerText = jogadorStats.dreb;
-         player_fga.innerText = jogadorStats.fga;
-         player_fgm.innerText = jogadorStats.fgm;
-         player_blk.innerText = jogadorStats.blk;
-         player_fta.innerText = jogadorStats.fta;
-         player_ftm.innerText = jogadorStats.ftm;
-         player_pf.innerText = jogadorStats.pf;
-         player_fs.innerText = jogadorStats.fs;
-         player_to.innerText = jogadorStats.to;
+         player_pts.innerText = jogadorStats.pts.toFixed(1);
+         player_ast.innerText = jogadorStats.ast.toFixed(1);
+         player_stl.innerText = jogadorStats.stl.toFixed(1);
+         player_oreb.innerText = jogadorStats.oreb.toFixed(1);
+         player_dreb.innerText = jogadorStats.dreb.toFixed(1);
+         player_fga.innerText = jogadorStats.fga.toFixed(1);
+         player_fgm.innerText = jogadorStats.fgm.toFixed(1);
+         player_blk.innerText = jogadorStats.blk.toFixed(1);
+         player_fta.innerText = jogadorStats.fta.toFixed(1);
+         player_ftm.innerText = jogadorStats.ftm.toFixed(1);
+         player_pf.innerText = jogadorStats.pf.toFixed(1);
+         player_fs.innerText = jogadorStats.fs.toFixed(1);
+         player_to.innerText = jogadorStats.to.toFixed(1);
          player_min.innerText = jogadorStats.min;
          
          playerChart.data.datasets[0].data[0] = jogadorStats.fga - jogadorStats.fgm;

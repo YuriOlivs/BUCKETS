@@ -16,7 +16,7 @@
     <script src="js/script.js"></script>
 </head>
 
-<body>
+<body onload="renderTopPlayers()">
   <div class="splash-screen"></div>
   <header id="header">
     <nav id="navbar">
@@ -118,10 +118,31 @@
           Acompanhe as estatísticas dos 10 jogadores mais bem cotados na corrida para o prêmio Kia MVP da NBA. Veja como eles se comparam em pontos, assistências, rebotes e, claro, o índice PIE de cada um deles!
         </p>
       </div>
-      <div class="jogador">
-        <img src="" alt="" class="img-jogador">
-        <img src="" alt="" class="time-jogador">
-        <p class="descricao-jogador"></p>
+      <div id="jogadores_top10">
+        <!-- <div class="jogador-left">
+          <div class="imgs-jogador">
+            <img src="" alt="" class="img-jogador">
+            <img src="" alt="" class="img-time">
+            <div class="gradient"></div>
+          </div>
+        
+          <div class="desc-jogador">
+            <div class="title-jogador">
+              <div class="nome-jogador">nome jogador</div>
+              <div class="time-jogador">time jogador</div>
+            </div>
+            <div class="stats">
+              <div class="flex-row">
+                <span id="pontos">12 ppg</span>
+                <span id="assist">12 ppg</span>
+              </div>
+              <div class="flex-row">
+                <span id="rebotes">12 ppg</span>
+                <span id="pie">12 ppg</span>
+              </div>
+            </div>
+          </div>
+        </div> -->
       </div>
     </section>
     <section id="time">

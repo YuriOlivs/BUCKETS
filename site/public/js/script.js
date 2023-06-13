@@ -175,3 +175,234 @@ function greetings() {
 
     saudacaoSpan.innerText = `${saudacao}, ${nome}!`;
 }
+
+function sair() {
+    sessionStorage.clear()
+
+    setTimeout(function () {
+        window.location = "../login.html";
+    }, 1000); 
+}
+
+function validarSessao() {
+    
+}
+
+function renderTopPlayers() {
+    var top10 = document.getElementById("jogadores_top10");
+    var jogadores = [
+        {
+            nome: "Joel Embiid",
+            time_nome: "Philadelphia 76ers",
+            img: "joel.png",
+            time_img: "sixers.png",
+            stats: {
+                ppg: 33.1,
+                rpg: 10.2,
+                apg: 4.2,
+                pie: 21.3
+            }
+        },
+        {
+            nome: "Nikola Jokic",
+            time_nome: "Denver Nuggets",
+            img: "jokic.png",
+            time_img: "nuggets.png",
+            stats: {
+                ppg: 24.5,
+                rpg: 11.8,
+                apg: 9.8,
+                pie: 21.1
+            }
+        },
+        {
+            nome: "Antetokounmp",
+            time_nome: "Milwaukee Bucks",
+            img:"giannis.png",
+            time_img: "bucks.png",
+            stats: {
+                ppg: 31.1,
+                rpg: 11.8,
+                apg: 5.7,
+                pie: 20.4
+            }
+        },
+        {
+            nome: "Jayson Tatum",
+            time_nome: "Boston Celtics",
+            img: "tatum.png",
+            time_img: "celtics.png",
+            stats: {
+                ppg: 30.1,
+                rpg: 8.8,
+                apg: 4.6,
+                pie: 16.7
+            }
+        },
+        {
+            nome: "Donovan Mitchell",
+            time_nome: "Cleveland Cavaliers",
+            img: "mitchell.png",
+            time_img: "cavs.png",
+            stats: {
+                ppg: 28.3,
+                rpg: 4.3,
+                apg: 4.4,
+                pie: 14.9
+            }
+        },
+        {
+            nome: "Domantas Sabonis",
+            time_nome: "Sacramento Kings",
+            img: "sabonis.png",
+            time_img: "kings.png",
+            stats: {
+                ppg: 19.1,
+                rpg: 12.3,
+                apg: 7.3,
+                pie: 16.1
+            }
+        },
+        {
+            nome: "Gilgeous-Alexander",
+            time_nome: "Oklahoma City Thunder",
+            img: "shai.png",
+            time_img: "okc.png",
+            stats: {
+                ppg: 31.4,
+                rpg: 4.8,
+                apg: 5.5,
+                pie: 17.5
+            }
+        },
+        {
+            nome: "Luka Doncic",
+            time_nome: "Dallas Mavericks",
+            img: "doncic.png",
+            time_img: "mavs.png",
+            stats: {
+                ppg: 32.4,
+                rpg: 8.6,
+                apg: 8.0,
+                pie: 20.2
+            }
+        },
+        {
+            nome: "James Harden",
+            time_nome: "Philadelphia 76ers",
+            img: "harden.png",
+            time_img: "sixers.png",
+            stats: {
+                ppg: 21.1,
+                rpg: 6.1,
+                apg: 10.7,
+                pie: 15.9
+            }
+        },
+        {
+            nome: "Kevin Durant",
+            time_nome: "Phoenix Suns",
+            img: "durant.png",
+            time_img: "suns.png",
+            stats: {
+                ppg: 29.1,
+                rpg: 6.7,
+                apg: 5.0,
+                pie: 18.5
+            }
+        }
+    ];
+
+    var contador = 0;
+    jogadores.forEach(jogador => {
+        contador++;
+
+        var divJogador = document.createElement("div");
+        if(contador % 2 == 0) {
+            divJogador.className = "jogador-right";
+        } else {
+            divJogador.className = "jogador-left";
+        }
+        
+        var imgsJogador = document.createElement("div");
+        imgsJogador.className = "imgs-jogador";
+        
+        var imgJogador = document.createElement("img");
+        imgJogador.src = `/public/assets/players/profile/players/${jogador.img}`; // Defina a URL da imagem do jogador
+        imgJogador.alt = jogador.nome;
+        imgJogador.className = "img-jogador";
+        
+        var imgTime = document.createElement("img");
+        imgTime.src = `/public/assets/players/profile/teams/${jogador.time_img}`; // Defina a URL da imagem do time
+        imgTime.alt = "";
+        imgTime.className = "img-time";
+        
+        var gradient = document.createElement("div");
+        gradient.className = "gradient";
+        
+        imgsJogador.appendChild(imgJogador);
+        imgsJogador.appendChild(imgTime);
+        imgsJogador.appendChild(gradient);
+        
+        divJogador.appendChild(imgsJogador);
+        
+        var descJogador = document.createElement("div");
+        descJogador.className = "desc-jogador";
+        
+        var titleJogador = document.createElement("div");
+        titleJogador.className = "title-jogador";
+        
+        var nomeJogador = document.createElement("div");
+        nomeJogador.className = "nome-jogador";
+        nomeJogador.textContent = jogador.nome; // Defina o nome do jogador
+        
+        var timeJogador = document.createElement("div");
+        timeJogador.className = "time-jogador";
+        timeJogador.textContent = jogador.time_nome; // Defina o time do jogador
+        
+        titleJogador.appendChild(nomeJogador);
+        titleJogador.appendChild(timeJogador);
+        
+        var stats = document.createElement("div");
+        stats.className = "stats";
+        
+        var flexRow1 = document.createElement("div");
+        flexRow1.className = "flex-row";
+        
+        var pontos = document.createElement("span");
+        pontos.id = "pontos";
+        pontos.textContent = `${jogador.stats.ppg} ppg`; // Defina a pontuação do jogador
+        
+        var assist = document.createElement("span");
+        assist.id = "assist";
+        assist.textContent = `${jogador.stats.apg} apg`; // Defina as assistências do jogador
+        
+        flexRow1.appendChild(pontos);
+        flexRow1.appendChild(assist);
+        
+        var flexRow2 = document.createElement("div");
+        flexRow2.className = "flex-row";
+        
+        var rebotes = document.createElement("span");
+        rebotes.id = "rebotes";
+        rebotes.textContent = `${jogador.stats.rpg} rpg`; // Defina os rebotes do jogador
+        
+        var pie = document.createElement("span");
+        pie.id = "pie";
+        pie.textContent = `${jogador.stats.pie} pie`; // Defina o valor do PIE do jogador
+        
+        flexRow2.appendChild(rebotes);
+        flexRow2.appendChild(pie);
+        
+        stats.appendChild(flexRow1);
+        stats.appendChild(flexRow2);
+        
+        descJogador.appendChild(titleJogador);
+        descJogador.appendChild(stats);
+        
+        divJogador.appendChild(imgsJogador);
+        divJogador.appendChild(descJogador);
+        
+        top10.appendChild(divJogador);
+    });
+}

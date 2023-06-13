@@ -480,6 +480,110 @@ input {
   font-weight: 700;
 }
 
+#jogadores_top10 {
+  width: 100%;
+  margin-top: 50px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.jogador-left {
+  display: flex;
+  gap: 15vw;
+  width: 100%;
+}
+
+.jogador-right {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 15vw;
+  width: 100%;
+}
+
+.imgs-jogador {
+  position: relative;
+  width: 25vw;
+  height: 40vh;
+}
+
+.img-jogador {
+  position: absolute;
+  width: 100%;
+}
+
+.img-time {
+  position: absolute;
+  top: -5%;
+  left: 0;
+  width: 70%;
+  z-index: -1;
+  filter: opacity(0.3);
+}
+
+.desc-jogador {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.gradient {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  background-color: red;
+  background: rgb(0,0,0);
+  background: linear-gradient(0deg, rgba(0,0,0,1) 4%, rgba(199,235,196,0) 82%);
+}
+
+.title-jogador {
+  display: flex;
+  flex-direction: column;
+}
+
+.nome-jogador, .time-jogador {
+  color: white;
+  font-family: var(--title-font);
+  font-weight: 900;
+  text-transform: uppercase;
+  font-size: 3rem;
+  -webkit-text-stroke: 1px white;
+  margin: 0;
+  padding: 0;
+}
+
+.time-jogador {
+  color: transparent;
+  font-size: 2rem;
+}
+
+.stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+}
+
+.stats span {
+  font-family: var(--title-font);
+  font-weight: 700;
+  font-size: 2rem;
+}
+
+.valor-stats {
+  font-size: 3rem;
+}
+
+.stats .flex-row {
+  gap: 50px;
+}
+
+/* dashboards e calculadora */
 #calc {
   position: relative;
   display: flex;
