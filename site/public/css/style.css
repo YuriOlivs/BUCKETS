@@ -421,7 +421,7 @@ input {
 .image-right  {
   position: absolute;
   right: var(--main-padding);
-  width: 35%;
+  width: 32%;
   right: 15%;
   bottom: 0%;
   user-select: none;
