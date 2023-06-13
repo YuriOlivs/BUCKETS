@@ -216,7 +216,7 @@ function renderTopPlayers() {
             }
         },
         {
-            nome: "Antetokounmp",
+            nome: "Antetokounmpo",
             time_nome: "Milwaukee Bucks",
             img:"giannis.png",
             time_img: "bucks.png",
@@ -328,12 +328,12 @@ function renderTopPlayers() {
         imgsJogador.className = "imgs-jogador";
         
         var imgJogador = document.createElement("img");
-        imgJogador.src = `/public/assets/players/profile/players/${jogador.img}`; // Defina a URL da imagem do jogador
+        imgJogador.src = `assets/players/profile/players/${jogador.img}`; 
         imgJogador.alt = jogador.nome;
         imgJogador.className = "img-jogador";
         
         var imgTime = document.createElement("img");
-        imgTime.src = `/public/assets/players/profile/teams/${jogador.time_img}`; // Defina a URL da imagem do time
+        imgTime.src = `assets/players/profile/teams/${jogador.time_img}`; 
         imgTime.alt = "";
         imgTime.className = "img-time";
         
@@ -354,11 +354,11 @@ function renderTopPlayers() {
         
         var nomeJogador = document.createElement("div");
         nomeJogador.className = "nome-jogador";
-        nomeJogador.textContent = jogador.nome; // Defina o nome do jogador
+        nomeJogador.textContent = jogador.nome; 
         
         var timeJogador = document.createElement("div");
         timeJogador.className = "time-jogador";
-        timeJogador.textContent = jogador.time_nome; // Defina o time do jogador
+        timeJogador.textContent = jogador.time_nome; 
         
         titleJogador.appendChild(nomeJogador);
         titleJogador.appendChild(timeJogador);
@@ -371,11 +371,11 @@ function renderTopPlayers() {
         
         var pontos = document.createElement("span");
         pontos.id = "pontos";
-        pontos.textContent = `${jogador.stats.ppg} ppg`; // Defina a pontuação do jogador
+        pontos.textContent = `${jogador.stats.ppg} ppg`; 
         
         var assist = document.createElement("span");
         assist.id = "assist";
-        assist.textContent = `${jogador.stats.apg} apg`; // Defina as assistências do jogador
+        assist.textContent = `${jogador.stats.apg} apg`; 
         
         flexRow1.appendChild(pontos);
         flexRow1.appendChild(assist);
@@ -385,11 +385,11 @@ function renderTopPlayers() {
         
         var rebotes = document.createElement("span");
         rebotes.id = "rebotes";
-        rebotes.textContent = `${jogador.stats.rpg} rpg`; // Defina os rebotes do jogador
+        rebotes.textContent = `${jogador.stats.rpg} rpg`; 
         
         var pie = document.createElement("span");
         pie.id = "pie";
-        pie.textContent = `${jogador.stats.pie} pie`; // Defina o valor do PIE do jogador
+        pie.textContent = `${jogador.stats.pie} pie`; 
         
         flexRow2.appendChild(rebotes);
         flexRow2.appendChild(pie);
