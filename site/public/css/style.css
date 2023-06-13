@@ -79,6 +79,13 @@ select option  {
   color: var(--gray-500);
 }
 
+.buckets {
+  color: white;
+  font-family: var(--title-font);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
 .input-box {
   position: relative;
   display: flex;
