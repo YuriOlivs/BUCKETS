@@ -267,13 +267,18 @@ input {
 /* BACKGROUND DA HEADER */
 
 .site-background {
+  height: 100vh;
   position: absolute;
+}
+
+.site-background.background-oqe {
+  height: 80vh;
 }
 
 .noise {
   position: absolute;
   width: 100vw;
-  height: 100vh;
+  height: 100%;
   mix-blend-mode: overlay;
   user-select: none;
   pointer-events: none;
@@ -339,18 +344,52 @@ input {
   rotate: 90deg;
 }
 
+#projeto {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.projeto-titles {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.projeto-content {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 1;
+  padding: var(--main-padding) var(--main-padding);
+  padding-bottom: var(--main-padding * 0.5);
+}
+
+.projeto-desc {
+  text-align: justify;
+  color: white;
+  margin-top: 20px;
+}
+
+.link-to {
+  text-decoration: none;
+  color: #BF201C;
+}
 
 #oqe {
   position: relative;
   display: flex;
   width: 100%;
-  margin-top: 100px;
+  margin-top: 0px;
 }
 
 .oqe-content {
   display: flex;
   position: relative;
-  padding: calc(var(--main-padding) * 1.8) var(--main-padding);
+  padding: 0 var(--main-padding);
+  padding-top: 0;
   padding-bottom: 0;
   z-index: 1;
 }
@@ -382,7 +421,8 @@ input {
 .image-right  {
   position: absolute;
   right: var(--main-padding);
-  width: 45%;
+  width: 35%;
+  right: 15%;
   bottom: 0%;
   user-select: none;
 }
@@ -502,8 +542,8 @@ input {
 
 .imgs-jogador {
   position: relative;
-  width: 25vw;
-  height: 40vh;
+  width: 30vw;
+  height: 47.5vh;
 }
 
 .img-jogador {
