@@ -261,7 +261,7 @@ function listarPtsPie(idUsuario) {
                    },
                    layout: {
                      padding: {
-                        bottom: 15,
+                        bottom: 30,
                         top: 15
                      },
                   },
