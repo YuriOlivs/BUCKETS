@@ -677,36 +677,6 @@ input {
 }
 
 
-/* dashboards e calculadora */
-#calc {
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  height: 100%;
-  gap: 50px;
-  padding: var(--dash-padding);
-  box-sizing: border-box;
-}
-
-.calc-form {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  justify-content: space-between;
-  height: 100%;
-  /* background-color: aqua; */
-}
-
-.calc-form .input-box label{
-  box-sizing: border-box;
-}
-
-.calc-form .flex-row {
-  gap: 10px;
-}
-
 footer {
   display: flex;
   align-items: center;
@@ -756,6 +726,45 @@ footer {
   list-style-type: none;
 }
 
+.footer-redes {
+  display: flex;
+  gap: 12px;
+}
+
+.footer-redes img {
+  width: 25px;
+}
+
+/* dashboards e calculadora */
+#calc {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  height: 100%;
+  gap: 50px;
+  padding: var(--dash-padding);
+  box-sizing: border-box;
+}
+
+.calc-form {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  justify-content: space-between;
+  height: 100%;
+  /* background-color: aqua; */
+}
+
+.calc-form .input-box label{
+  box-sizing: border-box;
+}
+
+.calc-form .flex-row {
+  gap: 10px;
+}
+
 .btn {
   background-color: var(--blue-500);
   color: var(--blue-800);
@@ -796,6 +805,10 @@ footer {
   max-width: 400px;
 }
 
+#pie_user {
+  position: absolute;
+}
+
 select::-webkit-scrollbar {
   width: 5px;
 }
@@ -815,6 +828,10 @@ select::-webkit-scrollbar-thumb {
   gap: 10px;
   box-sizing: border-box;
   /* background-color: blue; */
+}
+
+#player_name {
+  color: white !important;
 }
 
 .player-form .flex-row {

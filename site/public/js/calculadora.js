@@ -44,7 +44,7 @@ function getJogadorStats() {
       foulSofri: Number(ipt_foul_sofridas.value),
       roubosBola: Number(ipt_roubos_bola.value),
       tocos: Number(ipt_tocos.value),
-      turnovers: Number(ipt_turnovers.value)
+      turnovers: Number(ipt_turnovers.value),
    }
 
    ipt_nome_jogador.disabled = true;
@@ -76,14 +76,14 @@ function getTeamStats() {
    limparInputs();
    btn_calc.setAttribute("onclick", "calcPIE()");
    cadStats();
-   showUserStats();
 }
 
 function calcPIE() {
    // var efcJogador = (pontosJogador + assistsJogador + offRebotesJogador + defRebotesJogador + tocosJogador + foulSofridasJogador + roubosBolaJogador) - (arrmsErradosJogador + llErradosJogador + errosJogador +foulCometidasJogador)         
    var pie = (jogador.pontos + jogador.arrmsCert + jogador.llCert - jogador.arrmsErr - jogador.llErr + jogador.rebotesDef + jogador.rebotesOff / 2 + jogador.assists + jogador.roubosBola + jogador.tocos / 2 - jogador.foulComet - jogador.turnovers) / (time.pontos + time.arrmsCert + time.llCert - time.arrmsErr - time.llErr + time.rebotesDef + time.rebotesOff / 2 + time.assists + time.roubosBola + time.tocos / 2 - time.foulComet - time.turnovers)
-   pie = pie.toFixed(2);
+   pie = pie.toFixed(1);
 
+   user_pie.innerText = pie;
    return pie;
 }
 
@@ -118,7 +118,7 @@ function cadStats() {
       console.log("resposta: ", resposta);
 
       if (resposta.ok) {
-         alert('Cadastro realizado com sucesso')
+         console.log('Cadastro realizado com sucesso')
       } else {
          throw ("Houve um erro ao tentar realizar o cadastro!");
       }
@@ -195,19 +195,19 @@ function enterKeyPressed(e) {
 function showUserStats() {
    user_nome.style.color = 'white';
    user_nome.innerText = jogador.nome;
-   user_pts.innerText = jogador.pontos;
-   user_ast.innerText = jogador.assists;
-   user_stl.innerText = jogador.roubosBola;
-   user_oreb.innerText = jogador.rebotesOff;
-   user_dreb.innerText = jogador.rebotesDef;
-   user_fga.innerText = jogador.arrmsCert + jogador.arrmsErr;
-   user_fgm.innerText = jogador.arrmsCert;
-   user_blk.innerText = jogador.tocos;
-   user_fta.innerText = jogador.llCert + jogador.llErr;
-   user_ftm.innerText = jogador.llCert;
-   user_pf.innerText = jogador.foulComet;
-   user_fs.innerText = jogador.foulSofri;
-   user_to.innerText = jogador.turnovers;
+   user_pts.innerText = jogador.pontos.toFixed(1);
+   user_ast.innerText = jogador.assists.toFixed(1);
+   user_stl.innerText = jogador.roubosBola.toFixed(1);
+   user_oreb.innerText = jogador.rebotesOff.toFixed(1);
+   user_dreb.innerText = jogador.rebotesDef.toFixed(1);
+   user_fga.innerText = (jogador.arrmsCert + jogador.arrmsErr).toFixed(1);
+   user_fgm.innerText = jogador.arrmsCert.toFixed(1);
+   user_blk.innerText = jogador.tocos.toFixed(1);
+   user_fta.innerText = (jogador.llCert + jogador.llErr).toFixed(1);
+   user_ftm.innerText = jogador.llCert.toFixed(1);
+   user_pf.innerText = jogador.foulComet.toFixed(1);
+   user_fs.innerText = jogador.foulSofri.toFixed(1);
+   user_to.innerText = jogador.turnovers.toFixed(1);
    user_min.innerText = jogador.minutos;
 
    userChart.data.datasets[0].data[0] = jogador.arrmsErr;
