@@ -373,6 +373,7 @@ function renderTopPlayers() {
         if(jogador.vencedor == true) {
             nomeJogador.classList.add("winner");
             timeJogador.classList.add("winner");
+            timeJogador.style.color = 'transparent !important';
             nomeJogador.innerHTML += `<span id="crown">♔</span>`;
 
             tippy("#crown", {
