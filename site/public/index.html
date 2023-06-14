@@ -12,8 +12,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="icon" href="assets/icons/basketball.png" type="image/x-icon">
 
-    <script src="./js/funcoes.js"></script>
-    <script src="js/script.js"></script>
+    <script src="./js/funcoes.js" defer></script>
+    <script src="js/script.js" defer></script>
+
+    <script src="https://unpkg.com/@popperjs/core@2/dist/umd/popper.min.js"></script>
+<script src="https://unpkg.com/tippy.js@6/dist/tippy-bundle.umd.js"></script>
 </head>
 
 <body onload="renderTopPlayers()">
@@ -25,7 +28,7 @@
         <li class="nav-item"><a href="#oqe">O que é PIE</a></li>
         <li class="nav-item"><a href="#jogadores">Jogadores</a></li>
         <li class="nav-item"><a href="#projeto">Projeto</a></li>
-        <li class="nav-item"><a href="#sobre_mim">Sobre mim</a></li>
+        <li class="nav-item"><a href="#sobre-mim">Sobre mim</a></li>
         <li class="nav-item"><a href="login.html">Login</a></li>
       </ul>
 
@@ -132,8 +135,17 @@
       <div id="jogadores_top10">
       </div>
     </section>
-    <section id="sobre_mim">
-      
+    <section id="sobre-mim">
+        <h2 class="title">Sobre mim</h2>
+        <div class="sobre-mim-content">
+          <img src="assets/eueueu.jpg" alt="" class="sobre-mim-img">
+          <div class="sobre-mim-textos">
+            <span><span class="buckets">SALVE!</span> Me chamo Yuri, tenho 18 anos e atualmente sou estudante de Análise e Desenvolvimento de Sistemas na SPTECH!</span>
+            <span>Este projeto foi feito com muito carinho e amor por mim para meu projeto individual do primeiro semestre da faculdade! Ele não possui qualquer tipo de monetização e não é algo que eu tenha em mente.</span>
+            <span>Falando um pouco sobre o porquê da minha escolha de tema, a NBA é algo relativamente recente na minha vida, já que comecei a acompanhar em 2021 por influência de amigos meus que já acompanhavam. Desde então tem sido uma experiência e tanto estar nesse mundo do basquete. Seja ficando acordado até 3 da manhã para assistir, seja jogando. (In)felizmente sou torcedor do Chicago Bulls! De início simpatizava com o time pelas cores mas com o passar do tempo fui me identificando cada vez mais com o time (claro, o documentário The Last Dance do Jordan ajudou bastante nisso) até eventualmente começar a torcer.</span>
+            <span>Meu jogador favorito é o Jimmy Butler (Jimmy Buckets), desde que comecei a acompanhar a liga, ele é um jogador que me chame a atenção, tanto por sua personalidade e história de vida quanto pelo seu jogo, além de claro, ter sido originado no Bulls (volta 😭).</span>
+          </div>
+        </div>
     </section>
   </main>
 </body>

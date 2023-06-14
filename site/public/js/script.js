@@ -201,7 +201,8 @@ function renderTopPlayers() {
                 rpg: 10.2,
                 apg: 4.2,
                 pie: 21.3
-            }
+            },
+            vencedor: true,
         },
         {
             nome: "Nikola Jokic",
@@ -213,7 +214,8 @@ function renderTopPlayers() {
                 rpg: 11.8,
                 apg: 9.8,
                 pie: 21.1
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Antetokounmpo",
@@ -225,7 +227,8 @@ function renderTopPlayers() {
                 rpg: 11.8,
                 apg: 5.7,
                 pie: 20.4
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Jayson Tatum",
@@ -237,7 +240,8 @@ function renderTopPlayers() {
                 rpg: 8.8,
                 apg: 4.6,
                 pie: 16.7
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Donovan Mitchell",
@@ -249,7 +253,8 @@ function renderTopPlayers() {
                 rpg: 4.3,
                 apg: 4.4,
                 pie: 14.9
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Domantas Sabonis",
@@ -261,7 +266,8 @@ function renderTopPlayers() {
                 rpg: 12.3,
                 apg: 7.3,
                 pie: 16.1
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Gilgeous-Alexander",
@@ -273,7 +279,8 @@ function renderTopPlayers() {
                 rpg: 4.8,
                 apg: 5.5,
                 pie: 17.5
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Luka Doncic",
@@ -285,7 +292,8 @@ function renderTopPlayers() {
                 rpg: 8.6,
                 apg: 8.0,
                 pie: 20.2
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "James Harden",
@@ -297,7 +305,8 @@ function renderTopPlayers() {
                 rpg: 6.1,
                 apg: 10.7,
                 pie: 15.9
-            }
+            },
+            vencedor: false,
         },
         {
             nome: "Kevin Durant",
@@ -309,7 +318,8 @@ function renderTopPlayers() {
                 rpg: 6.7,
                 apg: 5.0,
                 pie: 18.5
-            }
+            },
+            vencedor: false,
         }
     ];
 
@@ -354,17 +364,31 @@ function renderTopPlayers() {
         
         var nomeJogador = document.createElement("div");
         nomeJogador.className = "nome-jogador";
-        nomeJogador.textContent = jogador.nome; 
+        nomeJogador.textContent = `${jogador.nome}`; 
         
         var timeJogador = document.createElement("div");
         timeJogador.className = "time-jogador";
         timeJogador.textContent = jogador.time_nome; 
+
+        if(jogador.vencedor == true) {
+            nomeJogador.classList.add("winner");
+            timeJogador.classList.add("winner");
+            nomeJogador.innerHTML += `<span id="crown">♔</span>`;
+
+            tippy("#crown", {
+                content: `${jogador.nome} foi o vencedor da corrida para MVP 2023!`,
+                placement: 'bottom',
+             });
+        }
         
         titleJogador.appendChild(nomeJogador);
         titleJogador.appendChild(timeJogador);
         
         var stats = document.createElement("div");
         stats.className = "stats-mvp";
+        if(jogador.vencedor == true) {
+            stats.classList.add("winner");
+        }
         
         var flexRow1 = document.createElement("div");
         flexRow1.className = "flex-row";
